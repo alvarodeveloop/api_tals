@@ -1,0 +1,2 @@
+id;nombre;rut;direccion;correo;telefono;ceo;rut_ceo;telefono_ceo;correo_ceo;giro;createdAt;updatedAt
+3;prueba;1;a;a@gmail.com;0123;a;123;123;a@gmail.com;alvaro;2018-08-20 10:51:21.265-04;2018-08-20 11:15:44.172-04
