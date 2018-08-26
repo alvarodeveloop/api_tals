@@ -18,6 +18,7 @@ function stored(req,res){
   let params = req.body
   params.image = req.file.filename
   params.register_type = 0
+  delete params.id
 
   models.Publicity.findAll({ where: {name: params.name }}).then(total => {
     if(total.length > 0){
