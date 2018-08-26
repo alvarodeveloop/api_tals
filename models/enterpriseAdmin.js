@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const Annotation = sequelize.define("enterprise_admin", {
+  const EnterpriseAdmin = sequelize.define("enterprise_admin", {
       nombre: { 
             type: DataTypes.STRING    
           },         
@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
   });
   
   
-  return Annotation;
+  return EnterpriseAdmin;
 
 };  
 

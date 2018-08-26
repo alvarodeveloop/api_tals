@@ -26,6 +26,8 @@ dialect: 'postgres'
 
 const models = {
   EnterpriseAdmin: sequelize.import('./enterpriseAdmin'),
+  Publicity: sequelize.import('./publicity'),
+  PublicityEnterprise: sequelize.import('./publicityEnterprise')
 }; 
 
 
