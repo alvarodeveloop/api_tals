@@ -28,7 +28,9 @@ port: '5434'
 const models = {
   User: sequelize.import('./user'),
   Publicity: sequelize.import('./publicity'),
-  PublicityEnterprise: sequelize.import('./publicityEnterprise')
+  PublicityEnterprise: sequelize.import('./publicityEnterprise'),
+  Profile: sequelize.import('./profile'),
+  TipoProfile: sequelize.import('./tipoProfile'),
 }; 
 
 
