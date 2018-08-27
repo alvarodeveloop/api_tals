@@ -17,6 +17,14 @@ const uploadPublicity = multer({ storage: storagePublicity   })
 
 const EnterpriseAdmin = require('../controllers/admin/enterprise')
 const Publicity = require('../controllers/admin/publicity')
+const User = require('../controllers/user/user')
+
+//Controlador user
+//Recuperar contraseña
+api.get('/user/:email', User.recoveryPassword)
+
+//login
+api.post('/login', User.login)
 
  api.get('/enterpriseAdmin', EnterpriseAdmin.get)
  api.get('/enterpriseAdmin/:id',EnterpriseAdmin.findById)
