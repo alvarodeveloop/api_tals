@@ -3,10 +3,12 @@ const models = require('../../models/')
 
 function get(req,res){
 
-  models.EnterpriseAdmin.findAll().then(enter => {
+  models.User.findAll().then(enter => {
     res.json(enter)
-  }).error(err => res.status(500).json({ message: "error al guardar el registro"}) )
+  }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
 }
+
+
 
 function stored(req,res){
 
@@ -22,11 +24,11 @@ function stored(req,res){
     }]
   }
 
-  models.EnterpriseAdmin.findAll({ where: whereOr}).then(total => {
+  models.User.findAll({ where: whereOr}).then(total => {
     if(total.length > 0){
       res.status(500).json({ message: "Ya esta en uso el correo o el correo del ceo o el rut o el rut del ceo" })
     }else{
-      models.EnterpriseAdmin.create(req.body).then(stored => {
+      models.User.create(req.body).then(stored => {
         res.json({ enterprise: stored })
       }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
 
@@ -36,7 +38,7 @@ function stored(req,res){
 }
 
 function findById(req,res){
-  models.EnterpriseAdmin.findById(req.params.id).then(enter => {
+  models.User.findById(req.params.id).then(enter => {
 
     res.json(enter)
 
@@ -59,12 +61,13 @@ function update(req,res){
     id: { [models.Op.ne] : req.body.id }
   }
 
-  models.EnterpriseAdmin.findAll({ where: whereOr}).then(total => {
+  models.User.findAll({ where: whereOr}).then(total => {
     if(total.length > 0){
       res.status(500).json({ message: "Ya esta en uso el correo o el correo del ceo o el rut o el rut del ceo"} )
     }else{
-      models.EnterpriseAdmin.update(req.body,{where: {id: req.params.id}}).then(enter => {
-        res.json()
+      models.User.update(req.body,{where: {id: req.params.id}}).then(enter => {
+        //res.json()
+        res.status(200).send({ message: "Registro Modificado correctamente" });
       }).error(err => res.status(500).json({ message: "error en la petición"} ))
     }
   })
@@ -76,10 +79,13 @@ function destroy(req,res){
 
   const id = req.params.id
 
-  models.EnterpriseAdmin.destroy({ where: { id }}).then(destroy => {
+  models.User.destroy({ where: { id }}).then(destroy => {
     res.json()
   }).error(err => res.status(500).json({ message: "error en la petición"} ))
 }
+
+
+
 
 module.exports = {
   get,

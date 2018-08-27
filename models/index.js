@@ -19,13 +19,16 @@ dialect: 'postgres'
 
 // api local 
 
-const sequelize = new Sequelize("tals","postgres","admin123", {  
-dialect: 'postgres'
+const sequelize = new Sequelize("tals","postgres","123456", {  
+dialect: 'postgres',
+port: '5434'
 })
 
 
 const models = {
-  EnterpriseAdmin: sequelize.import('./enterpriseAdmin'),
+  User: sequelize.import('./user'),
+  Publicity: sequelize.import('./publicity'),
+  PublicityEnterprise: sequelize.import('./publicityEnterprise')
 }; 
 
 

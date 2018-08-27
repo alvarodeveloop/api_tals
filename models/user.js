@@ -2,7 +2,8 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const Annotation = sequelize.define("enterprise_admin", {
+  const User = sequelize.define("user", {
+
       nombre: { 
             type: DataTypes.STRING    
           },         
@@ -10,11 +11,21 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING
           },         
       direccion: { 
-            type: DataTypes.TEXT('LONG')    
+            type: DataTypes.TEXT()    
           },         
       correo: { 
-            type: DataTypes.STRING    
-          },         
+            type: DataTypes.STRING,
+            unique: true,     
+          },
+       password: { 
+          type: DataTypes.STRING    
+          },
+       tipo_id: { 
+          type: DataTypes.INTEGER    
+          }, 
+        profile_id: { 
+          type: DataTypes.INTEGER    
+          },    
       telefono: { 
             type: DataTypes.STRING
           },         
@@ -32,12 +43,9 @@ module.exports = (sequelize, DataTypes) => {
           },
       giro: { 
             type: DataTypes.STRING
-          }    
-  });
-  
-  
-  return Annotation;
+          }   
+     
+  }); 
 
-};  
-
-  
+    return User;
+};
