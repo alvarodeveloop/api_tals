@@ -13,7 +13,8 @@ module.exports = (sequelize, DataTypes) => {
   
   PublicityEnterprise.associate = model => {
 
-    PublicityEnterprise.belongsTo(model.EnterpriseAdmin, {
+
+    PublicityEnterprise.belongsTo(model.User, {
       foreignKey: 'id_enterprise',
       'as': 'empresas'
     })
