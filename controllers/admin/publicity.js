@@ -1,5 +1,7 @@
 
 const models = require('../../models/')
+const fs = require('fs');
+
 
 function get(req,res){
 
@@ -74,10 +76,19 @@ function destroy(req,res){
 
   const id = req.params.id
 
-  models.Publicity.destroy({ where: { id }}).then(destroy => {
-    res.json()
-  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+  models.Publicity.findById(id).then(publi => {
+    
+    const filePath = 'public/publicity/'+publi.dataValues.image; 
+
+    models.Publicity.destroy({ where: { id }}).then(destroy => {
+      console.log('aqui1')
+      fs.unlinkSync(filePath);
+      res.json()
+    }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
+
+  }).error(err => res.status(500).json({ message: "Error, por favor contacte a soporte"} ) )
 }
+
 
 module.exports = {
   get,
