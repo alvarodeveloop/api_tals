@@ -29,9 +29,57 @@ function codeRecoveryPassword(req,res){
       { res.status(500).send({ message: 'Este código No existe o esta Caducado. verifiqué' }); }
    else{
 
-      //cambio de contraseña al correo
+      var code = "";
+      var lon = 6;
+      var chars = "1234567890";
 
-      res.status(200).send({ message: "Su codigo "+code });
+      for (x=0; x < lon; x++)
+      {
+      rand = Math.floor(Math.random()*chars.length);
+      code += chars.substr(rand, 1);
+      }
+
+    code = code+enter.id;
+
+      //cambio de contraseña al correo
+    var Service = nodemailer.createTransport({
+      service: global.config.correo.service,
+      auth: {
+        user: global.config.correo.user,
+        pass: global.config.correo.pass
+      }
+    });
+
+    var mailOptions = {
+      from: global.config.correo.from,
+      to: enter.correo_user,
+      subject: 'Nueva Contraseña',
+      text: 'Tú nueva contraseña es '+code
+    };
+
+
+    Service.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.status(500).send({ message: "Error al enviar el correo" });
+      } else {
+
+       var nueva_clave = "";
+
+       nueva_clave  = bcrypt.hashSync(code, 10); 
+
+       var update_array ={};
+       update_array.password = nueva_clave;
+        
+       models.User.update(update_array, {where: { correo: enter.correo_user} }).then(resultado => { 
+
+          res.status(200).send({ message: "Su nueva contraseña fue enviada a su correo electrónico" });
+
+      }).error(err => res.status(500).json({ message: "error al guardar el registro Verifiqué con soporte"}))
+
+      }
+    })
+
    }
 
   }).catch(err => res.status(500).json({ message: 'Ha ocurrido un error al buscar el usuario a modificar'}) ); // fin f
@@ -113,7 +161,7 @@ function login(req, res) {
   var email = params.email;
 
   // ojo revisar esta funcion
-  email = email.toLowerCase();
+  //email = email.toLowerCase();
 
   var password = params.password;
   var passemail = password;
