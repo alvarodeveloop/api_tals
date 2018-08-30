@@ -81,7 +81,6 @@ function destroy(req,res){
     const filePath = 'public/publicity/'+publi.dataValues.image; 
 
     models.Publicity.destroy({ where: { id }}).then(destroy => {
-      console.log('aqui1')
       fs.unlinkSync(filePath);
       res.json()
     }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
