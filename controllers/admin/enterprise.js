@@ -40,16 +40,17 @@ function stored(req,res){
       models.User.create(req.body).then(stored => {
 
 
-      var Service = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-          user: 'sistemaweb2018@gmail.com',
-          pass: 'programacion01%'
-        }
-      });
 
-      var mailOptions = {
-        from: '"tals" <sistemaweb2018@gmail.com>',
+var Service = nodemailer.createTransport({
+      service: global.config.correo.service,
+      auth: {
+        user: global.config.correo.user,
+        pass: global.config.correo.pass
+      }
+    });
+
+    var mailOptions = {
+      from: global.config.correo.from,
         to: emailpassword,
         subject: 'Validación de cuenta',
         text: 'Tú contraseña es '+emailpassword
@@ -63,7 +64,6 @@ function stored(req,res){
           res.status(200).send({ message: "Su contraseña fue enviada a su correo electrónico" });
         }
       }) 
-
 
 
       models.Publicity.findAll({ where: {type: '1' }}).then(publicity => {

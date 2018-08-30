@@ -21,7 +21,10 @@ const User = require('../controllers/user/user')
 
 //Controlador user
 //Recuperar contraseña
-api.get('/user/:email', User.recoveryPassword)
+api.post('/recoveryPassword', User.recoveryPassword)
+api.post('/verify_code_recovery_password', User.codeRecoveryPassword)
+api.post('/verify_token', User.verifyToken)
+
 
 //login
 api.post('/login', User.login)
