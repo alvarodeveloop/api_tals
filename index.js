@@ -47,6 +47,22 @@ function runserver(){
         } 
       })
 
+
+        models.User.findAll().then( function(users) { 
+          if (users) {
+             if (users.length == 0){
+
+
+             //6599319 
+
+             models.User.create({nombre : 'ADMINISTRADOR', correo: 'darwinerc92@gmail.com', 
+                                 password :'$2b$10$Lq2iDGK5M2QvHAT./mxZv.hvVS.cvPWazNYVa3aKzFAA2H4gz15Em',
+                                 profile_id:1, tipo_profile_id: 1, email_verify: true});
+             }
+          } 
+
+        });
+
     });
     	
 
