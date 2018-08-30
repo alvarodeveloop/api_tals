@@ -43,7 +43,14 @@ module.exports = (sequelize, DataTypes) => {
           },
       giro: { 
             type: DataTypes.STRING
-          }   
+          },
+      code_verify: { 
+          type: DataTypes.STRING    
+        },
+      email_verify: { 
+          type: DataTypes.BOOLEAN,
+          default: false,
+        },         
   })
     return User;
 };

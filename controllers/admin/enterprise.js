@@ -20,7 +20,20 @@ function stored(req,res){
 
   req.body.profile_id = 2;
   req.body.tipo_profile_id = 1; //opcion desde la vista un seleccione de perfiles de empresa
+  req.body.email_verify = false;
 
+  var code = "";
+      var lon = 15;
+      var chars = "0123456789ABCDEFGHIJLMNOPQRSTXYWZ!#$%&/()=[*:;";
+
+      for (x=0; x < lon; x++)
+      {
+      rand = Math.floor(Math.random()*chars.length);
+      code += chars.substr(rand, 1);
+      }
+
+  req.body.code_verify = code;
+  
   let whereOr = {
     [models.Op.or]: [{
       correo: req.body.correo,
@@ -53,7 +66,7 @@ var Service = nodemailer.createTransport({
       from: global.config.correo.from,
         to: emailpassword,
         subject: 'Validación de cuenta',
-        text: 'Tú contraseña es '+emailpassword
+        text: 'Tú contraseña es '+emailpassword+ ' <br> para verificar su cuenta este es su codigo de verificación: '+code 
       };
 
       Service.sendMail(mailOptions, function (error, info) {

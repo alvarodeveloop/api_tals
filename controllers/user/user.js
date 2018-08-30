@@ -13,7 +13,30 @@ function verifyToken(req,res){
  var params = req.body;
  var code = params.code;
 
-   res.status(200).send({ message: "Su codigo "+code });
+
+models.User.findOne({ where: {code_verify: code, email_verify: false}}).then(enter => {
+
+   if (!enter) 
+      { res.status(500).send({ message: 'Este código No existe o esta Caducado. verifiqué' }); }
+   else{
+
+      //cambio de contraseña al correo
+
+       var update_array ={};
+       update_array.email_verify = true;
+        
+       models.User.update(update_array, {where: { correo: enter.correo} }).then(resultado => { 
+
+          res.status(200).send({ message: "Su cuenta ha sido verificada" });
+
+      }).error(err => res.status(500).json({ message: "error al verificar su cuenta de correo. Verifiqué con soporte"}))
+
+   }
+
+  }).catch(err => res.status(500).json({ message: 'Ha ocurrido un error al verificar su cuenta'}) ); // fin f
+  
+
+ 
 }
 
 /* //////////////////////////////////// Recuperación de contraseña  codigo/////////////////////////////////////////////////////// */
