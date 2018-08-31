@@ -37,6 +37,9 @@ const models = {
   Profile: sequelize.import('./profile'),
   TipoProfile: sequelize.import('./tipoProfile'),
   Code: sequelize.import('./code'),
+  Ticket: sequelize.import('./ticket'),
+  MotivoTicket: sequelize.import('./motivoTicket'),
+  Item: sequelize.import('./item'),
 }; 
 
 
