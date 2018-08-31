@@ -6,11 +6,11 @@ var moment = require('moment');
 var secret = 'clave_secreta_sistema_tals';
 
 exports.ensureAuth = function(req, res, next) {
-    if (!req.headers.Authorization) {
+    if (!req.headers.authorization) {
         return res.status(403).send({ message: 'La petición no tiene cabecera de autorización' });
     }
 
-  var token = req.headers.Authorization.split(' ')[1];
+  var token = req.headers.authorization.split(' ')[1];
     
     try {
         var payload = jwt.decode(token, secret);
@@ -22,7 +22,7 @@ exports.ensureAuth = function(req, res, next) {
     }
     //consulta
 
-
+    
 
     console.log("-------------"+payload.CorreoUser);
 
