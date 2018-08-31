@@ -35,9 +35,11 @@ function runserver(){
         models.TipoProfile.findAll().then( function(tipoprofiles) { 
         if (tipoprofiles) {
            if (tipoprofiles.length == 0){
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA BASICA', description: 'CON PUBLICIDAD IMPUESTA' });
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA MEDIA', description: 'EMPRESA CON PUBLICIDAD MIXTA' });
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA TOTAL', description: 'EMPRESA CON SU PROPIA PUBLICIDAD' });
+           models.TipoProfile.create({id: 1, profile_id: 1, name : 'ADMINISTRADOR', description: 'ADMIN DEL SISTEMA' });
+           models.TipoProfile.create({id: 2, profile_id: 2, name : 'EMPRESA BASICA', description: 'CON PUBLICIDAD IMPUESTA' });
+           models.TipoProfile.create({id: 3, profile_id: 2, name : 'EMPRESA MEDIA', description: 'EMPRESA CON PUBLICIDAD MIXTA' });
+           models.TipoProfile.create({id: 4, profile_id: 2, name : 'EMPRESA TOTAL', description: 'EMPRESA CON SU PROPIA PUBLICIDAD' });
+           models.TipoProfile.create({id: 5, profile_id: 3, name : 'USUARIO', description: 'USUARIO DEL SISTEMA' });
            resolve()
           }
           else

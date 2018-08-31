@@ -18,6 +18,7 @@ const uploadPublicity = multer({ storage: storagePublicity   })
 const EnterpriseAdmin = require('../controllers/admin/enterprise')
 const Publicity = require('../controllers/admin/publicity')
 const User = require('../controllers/user/user')
+var mdAuth = require('../middlewares/authenticated')
 
 //Controlador user
 //Recuperar contraseña
@@ -29,17 +30,17 @@ api.post('/verify_token', User.verifyToken)
 //login
 api.post('/login', User.login)
 
- api.get('/enterpriseAdmin', EnterpriseAdmin.get)
- api.get('/enterpriseAdmin/:id',EnterpriseAdmin.findById)
- api.post('/enterpriseAdmin', EnterpriseAdmin.stored)
- api.put('/enterpriseAdmin/:id', EnterpriseAdmin.update)
- api.delete('/enterpriseAdmin/:id', EnterpriseAdmin.destroy)
+ api.get('/enterpriseAdmin', mdAuth.ensureAuth,EnterpriseAdmin.get)
+ api.get('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.findById)
+ api.post('/enterpriseAdmin', mdAuth.ensureAuth,EnterpriseAdmin.stored)
+ api.put('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.update)
+ api.delete('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroy)
 
- api.get('/publicityModule', Publicity.get)
- api.get('/publicityModule/:id',Publicity.findById)
- api.post('/publicityModule', uploadPublicity.single('publicity'),Publicity.stored)
- api.put('/publicityModule/:id', uploadPublicity.single('publicity'),Publicity.update)
- api.delete('/publicityModule/:id', Publicity.destroy)
+ api.get('/publicityModule', mdAuth.ensureAuth,Publicity.get)
+ api.get('/publicityModule/:id', mdAuth.ensureAuth,Publicity.findById)
+ api.post('/publicityModule', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.stored)
+ api.put('/publicityModule/:id', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.update)
+ api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
 
 
 module.exports = api
