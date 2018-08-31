@@ -35,9 +35,11 @@ function runserver(){
         models.TipoProfile.findAll().then( function(tipoprofiles) { 
         if (tipoprofiles) {
            if (tipoprofiles.length == 0){
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA BASICA', description: 'CON PUBLICIDAD IMPUESTA' });
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA MEDIA', description: 'EMPRESA CON PUBLICIDAD MIXTA' });
-           models.TipoProfile.create({profile_id: 2, name : 'EMPRESA TOTAL', description: 'EMPRESA CON SU PROPIA PUBLICIDAD' });
+           models.TipoProfile.create({id: 1, profile_id: 1, name : 'ADMINISTRADOR', description: 'ADMIN DEL SISTEMA' });
+           models.TipoProfile.create({id: 2, profile_id: 2, name : 'EMPRESA BASICA', description: 'CON PUBLICIDAD IMPUESTA' });
+           models.TipoProfile.create({id: 3, profile_id: 2, name : 'EMPRESA MEDIA', description: 'EMPRESA CON PUBLICIDAD MIXTA' });
+           models.TipoProfile.create({id: 4, profile_id: 2, name : 'EMPRESA TOTAL', description: 'EMPRESA CON SU PROPIA PUBLICIDAD' });
+           models.TipoProfile.create({id: 5, profile_id: 3, name : 'USUARIO', description: 'USUARIO DEL SISTEMA' });
            resolve()
           }
           else
@@ -46,6 +48,22 @@ function runserver(){
           }
         } 
       })
+
+
+        models.User.findAll().then( function(users) { 
+          if (users) {
+             if (users.length == 0){
+
+
+             //6599319 
+
+             models.User.create({nombre : 'ADMINISTRADOR', correo: 'darwinerc92@gmail.com', 
+                                 password :'$2b$10$Lq2iDGK5M2QvHAT./mxZv.hvVS.cvPWazNYVa3aKzFAA2H4gz15Em',
+                                 profile_id:1, tipo_profile_id: 1, email_verify: true});
+             }
+          } 
+
+        });
 
     });
     	

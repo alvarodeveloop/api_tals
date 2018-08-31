@@ -117,7 +117,7 @@ function recoveryPassword(req,res){
   var email = params.email;
 
   // ojo revisar esta funcion
-  email = email.toLowerCase();
+  //email = email.toLowerCase();
 
   models.User.findOne({ where: { correo: email }}).then(enter => {
 

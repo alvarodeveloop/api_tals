@@ -5,9 +5,10 @@ var secret = 'clave_secreta_sistema_tals';
 exports.createToken = function (user) {
   
     var payload = {
+      CorreoUser: user.correo,
       nombre: user.nombre,
       iat: moment().unix(),
-      exp: moment().add(30, 'days').unix()
+      exp: moment().add(1, 'days').unix()
     }
 
     return jwt.encode(payload, secret);
