@@ -19,14 +19,14 @@ dialect: 'postgres'
 
 // api heroku 
 
-const sequelize = new Sequelize("d3prcq0la5lno8","zaikedvxmianpt","3b8ecaea65a6262d3aae7193c2e236a840c9adb0a0b143a7bbf6183955ea8d0f", {  
+/*const sequelize = new Sequelize("d3prcq0la5lno8","zaikedvxmianpt","3b8ecaea65a6262d3aae7193c2e236a840c9adb0a0b143a7bbf6183955ea8d0f", {  
 host: 'ec2-54-235-242-63.compute-1.amazonaws.com',  
 dialect: 'postgres',
 port: '5432'
 })
-
+*/
 // api local 
-/*const sequelize = new Sequelize("tals","postgres","123456", {  
+const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5434'
 })
