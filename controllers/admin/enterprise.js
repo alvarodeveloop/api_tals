@@ -136,7 +136,13 @@ function findById(req,res){
 }
 
 function update(req,res){
-  
+
+  if (req.body.statu_id === true){
+     req.body.statu_id = 1;
+  }else
+  {
+    req.body.statu_id = 2;
+  }  
 
   let whereOr = {
     [models.Op.or]: [{

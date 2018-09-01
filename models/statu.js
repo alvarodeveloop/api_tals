@@ -18,14 +18,17 @@ tipo_id: {
         },         
   });
 
-
    Statu.associate = model => {
     Statu.hasMany(model.User, {
       foreignKey: 'statu_id',
       'as': 'estatusUser'
     })
-  } 
 
+    Statu.hasMany(model.Ticket, {
+      foreignKey: 'statu_id',
+      'as': 'motivoEstatus'
+    })
+  } 
 
     return Statu; 
 
