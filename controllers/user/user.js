@@ -202,7 +202,7 @@ function login(req, res) {
              {  
 
               var user_array ={};
-
+              user_array.nombre = enter.nombre; 
               user_array.correo = enter.correo; 
               user_array.profile = enter.profile_id;
               user_array.tipo_profile_id = enter.tipo_profile_id;
