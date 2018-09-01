@@ -22,13 +22,7 @@ exports.ensureAuth = function(req, res, next) {
     }
     //consulta
 
-    
-
-    console.log("-------------"+payload.CorreoUser);
-
-
-
-    req.user = payload;
-
+      req.userCorreo = payload.CorreoUser, 
+   
     next();
 }

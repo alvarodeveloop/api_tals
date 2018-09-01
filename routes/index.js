@@ -26,6 +26,8 @@ api.post('/recoveryPassword', User.recoveryPassword)
 api.post('/verify_code_recovery_password', User.codeRecoveryPassword)
 api.post('/verify_token', User.verifyToken)
 
+api.get('/profile', mdAuth.ensureAuth,User.getProfile)
+
 
 //login
 api.post('/login', User.login)

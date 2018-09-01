@@ -5,6 +5,40 @@ var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var jwt = require('../../services/jwt');
 
+/* //////////////////////////////////// Profile /////////////////////////////////////////////////////////////*/ 
+function getProfile(req,res){
+
+let whereOr = {
+    [models.Op.or]: [{
+      correo: req.userCorreo,
+    }]
+  }
+
+  models.User.findOne({ where: whereOr}).then(enter => {
+
+      var perfil_array ={};
+       
+       perfil_array.nombre = enter.nombre;
+       perfil_array.rut = enter.rut;
+       perfil_array.direccion = enter.direccion;
+       perfil_array.correo = enter.correo;
+       perfil_array.profile_id = enter.profile_id; //hacer el join con el tabla perfil
+       perfil_array.telefono = enter.telefono;
+
+      if (enter.profile_id === 2)
+      {
+      perfil_array.ceo = enter.ceo;
+       perfil_array.rut_ceo = enter.rut_ceo;
+       perfil_array.telefono_ceo = enter.telefono_ceo;
+       perfil_array.correo_ceo = enter.correo_ceo;
+       perfil_array.giro = enter.giro;
+      }
+
+      res.json({ profile: perfil_array }) 
+
+  }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+
+}
 
 /* //////////////////////////////////// Verificación de cuenta/////////////////////////////////////////////////////// */
 
@@ -218,6 +252,7 @@ function login(req, res) {
 }
 
 module.exports = {
+  getProfile,
   verifyToken,
   codeRecoveryPassword,
   recoveryPassword,
