@@ -6,9 +6,6 @@ module.exports = (sequelize, DataTypes) => {
   user_id: { 
           type: DataTypes.INTEGER    
         },
-  admin_id: { 
-          type: DataTypes.INTEGER    
-        },
   motivo_id: { 
           type: DataTypes.INTEGER    
         },      
@@ -25,14 +22,19 @@ module.exports = (sequelize, DataTypes) => {
 
   });
 
-/*
-  Ticket.associate = model => {
-    Ticket.hasMany(model.MotivoTicket, {
-      foreignKey: 'motivo_id',
-      'as': 'motivo'
-    })
-  } 
-  */   
+ Ticket.associate = model => {
+      Ticket.belongsTo(model.MotivoTicket,{
+        foreignKey: 'motivo_id',
+        as : 'motivo'
+      })
+
+       Ticket.belongsTo(model.Statu,{
+        foreignKey: 'statu_id',
+        as : 'motivoEstatus'
+      })
+
+  }
+  
     return Ticket; 
 
 };

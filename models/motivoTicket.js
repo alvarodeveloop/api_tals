@@ -11,14 +11,15 @@ module.exports = (sequelize, DataTypes) => {
         },         
   });
 
-/*
+
   MotivoTicket.associate = model => {
     MotivoTicket.hasMany(model.Ticket, {
       foreignKey: 'motivo_id',
       'as': 'motivo'
     })
+
   } 
-  */   
+   
     return MotivoTicket; 
 
 };
