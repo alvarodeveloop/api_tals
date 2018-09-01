@@ -51,6 +51,13 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.BOOLEAN,
           default: false,
         },         
-  })
+  });
+
+   User.associate = model => {
+      User.belongsTo(model.Profile,{
+        foreignKey: 'profile_id',
+        as : 'perfiles'
+      })
+  }
     return User;
 };

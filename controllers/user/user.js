@@ -8,13 +8,13 @@ var jwt = require('../../services/jwt');
 /* //////////////////////////////////// Profile /////////////////////////////////////////////////////////////*/ 
 function getProfile(req,res){
 
-let whereOr = {
-    [models.Op.or]: [{
-      correo: req.userCorreo,
-    }]
-  }
-
-  models.User.findOne({ where: whereOr}).then(enter => {
+   models.User.findOne( {
+      where: { correo: req.userCorreo },
+      include: [{
+        model: models.Profile,
+        as : 'perfiles'
+      }]
+}).then(enter => {
 
       var perfil_array ={};
        
@@ -23,6 +23,7 @@ let whereOr = {
        perfil_array.direccion = enter.direccion;
        perfil_array.correo = enter.correo;
        perfil_array.profile_id = enter.profile_id; //hacer el join con el tabla perfil
+       perfil_array.nombre_profile = enter.perfiles.name; //hacer el join con el tabla perfil
        perfil_array.telefono = enter.telefono;
 
       if (enter.profile_id === 2)
