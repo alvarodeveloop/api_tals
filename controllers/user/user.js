@@ -5,6 +5,21 @@ var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var jwt = require('../../services/jwt');
 
+
+
+/* /////////////////////////////////// modificar profile ////////////////////////////////////////////////////*/
+
+function updateProfile(req,res){
+
+  let params = req.body
+
+ models.User.update(params,{where: {correo: req.params.correo}}).then(public => {
+        res.json()
+      }).error(err => res.status(500).json({ message: "Error en Consulta Comuníquese con soporte"} ))
+
+}
+
+
 /* //////////////////////////////////// Profile /////////////////////////////////////////////////////////////*/ 
 function getProfile(req,res){
 
@@ -253,6 +268,7 @@ function login(req, res) {
 }
 
 module.exports = {
+  updateProfile,
   getProfile,
   verifyToken,
   codeRecoveryPassword,
