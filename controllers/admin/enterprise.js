@@ -142,7 +142,15 @@ function update(req,res){
   }else
   {
     req.body.statu_id = 2;
-  }  
+  }
+
+ if (req.body.changePassword === true){
+     //cambio de contraseña
+     req.body.password = bcrypt.hashSync(req.body.password, 10);
+  }else
+  {
+    delete req.body.password;
+  }
 
   let whereOr = {
     [models.Op.or]: [{
