@@ -6,7 +6,13 @@ var nodemailer = require('nodemailer');
 
 function get(req,res){
 
-  models.User.findAll().then(enter => {
+  let whereOr = {
+    [models.Op.or]: [{
+      profile_id: 2,
+    }]
+  }
+
+  models.User.findAll({ where: whereOr}).then(enter => {
     res.json(enter)
   }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
 }
