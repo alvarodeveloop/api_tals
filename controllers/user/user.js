@@ -13,13 +13,6 @@ function updateProfile(req,res){
 
   let params = req.body
 
-  if (params.statu_id === true){
-     params.statu_id = 1;
-  }else
-  {
-    params.statu_id = 2;
-  }
-
  if (params.changePassword === true){
      //cambio de contraseña
     params.password = bcrypt.hashSync(params.password, 10);
