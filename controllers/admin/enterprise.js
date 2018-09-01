@@ -137,21 +137,6 @@ function findById(req,res){
 
 function update(req,res){
 
-  if (req.body.statu_id === true){
-     req.body.statu_id = 1;
-  }else
-  {
-    req.body.statu_id = 2;
-  }
-
- if (req.body.changePassword === true){
-     //cambio de contraseña
-     req.body.password = bcrypt.hashSync(req.body.password, 10);
-  }else
-  {
-    delete req.body.password;
-  }
-
   let whereOr = {
     [models.Op.or]: [{
       correo: req.body.correo,

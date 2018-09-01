@@ -13,6 +13,21 @@ function updateProfile(req,res){
 
   let params = req.body
 
+  if (params.statu_id === true){
+     params.statu_id = 1;
+  }else
+  {
+    params.statu_id = 2;
+  }
+
+ if (params.changePassword === true){
+     //cambio de contraseña
+    params.password = bcrypt.hashSync(params.password, 10);
+  }else
+  {
+    delete params.password;
+  }
+
  models.User.update(params,{where: {correo: req.params.correo}}).then(public => {
         res.json()
       }).error(err => res.status(500).json({ message: "Error en Consulta Comuníquese con soporte"} ))
