@@ -35,6 +35,7 @@ function stored(req,res){
   req.body.password = bcrypt.hashSync(req.body.correo, 10);
 
   req.body.profile_id = 2;
+  req.body.statu_id = 1;
   req.body.tipo_profile_id = 1; //opcion desde la vista un seleccione de perfiles de empresa
   req.body.email_verify = false;
 
