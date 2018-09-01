@@ -46,4 +46,6 @@ api.post('/login', User.login)
  api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
 
 
+
+
 module.exports = api

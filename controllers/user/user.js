@@ -239,7 +239,7 @@ function login(req, res) {
   var password = params.password;
   var passemail = password;
 
-  models.User.findOne({ where: { correo: email }}).then(enter => {
+  models.User.findOne({ where: { correo: email, statu_id: 1}}).then(enter => {
 
    if (!enter) 
       { res.status(500).send({ message: 'Error al comprobar usuario. verifiqué' }); }
