@@ -5,16 +5,31 @@ var nodemailer = require('nodemailer');
 var bcrypt = require('bcrypt');
 var jwt = require('../../services/jwt');
 
+
+
+/* /////////////////////////////////// modificar profile ////////////////////////////////////////////////////*/
+
+function updateProfile(req,res){
+
+  let params = req.body
+
+ models.User.update(params,{where: {correo: req.params.correo}}).then(public => {
+        res.json()
+      }).error(err => res.status(500).json({ message: "Error en Consulta Comuníquese con soporte"} ))
+
+}
+
+
 /* //////////////////////////////////// Profile /////////////////////////////////////////////////////////////*/ 
 function getProfile(req,res){
 
-let whereOr = {
-    [models.Op.or]: [{
-      correo: req.userCorreo,
-    }]
-  }
-
-  models.User.findOne({ where: whereOr}).then(enter => {
+   models.User.findOne( {
+      where: { correo: req.userCorreo },
+      include: [{
+        model: models.Profile,
+        as : 'perfiles'
+      }]
+}).then(enter => {
 
       var perfil_array ={};
        
@@ -23,6 +38,7 @@ let whereOr = {
        perfil_array.direccion = enter.direccion;
        perfil_array.correo = enter.correo;
        perfil_array.profile_id = enter.profile_id; //hacer el join con el tabla perfil
+       perfil_array.nombre_profile = enter.perfiles.name; //hacer el join con el tabla perfil
        perfil_array.telefono = enter.telefono;
 
       if (enter.profile_id === 2)
@@ -223,7 +239,7 @@ function login(req, res) {
   var password = params.password;
   var passemail = password;
 
-  models.User.findOne({ where: { correo: email }}).then(enter => {
+  models.User.findOne({ where: { correo: email, statu_id: 1}}).then(enter => {
 
    if (!enter) 
       { res.status(500).send({ message: 'Error al comprobar usuario. verifiqué' }); }
@@ -252,6 +268,7 @@ function login(req, res) {
 }
 
 module.exports = {
+  updateProfile,
   getProfile,
   verifyToken,
   codeRecoveryPassword,

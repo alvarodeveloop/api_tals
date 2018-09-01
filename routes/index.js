@@ -27,6 +27,7 @@ api.post('/verify_code_recovery_password', User.codeRecoveryPassword)
 api.post('/verify_token', User.verifyToken)
 
 api.get('/profile', mdAuth.ensureAuth,User.getProfile)
+api.patch('/profile/:correo', mdAuth.ensureAuth,User.updateProfile)
 
 
 //login
@@ -43,6 +44,8 @@ api.post('/login', User.login)
  api.post('/publicityModule', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.stored)
  api.put('/publicityModule/:id', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.update)
  api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
+
+
 
 
 module.exports = api

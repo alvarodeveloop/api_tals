@@ -12,7 +12,17 @@ function get(req,res){
     }]
   }
 
-  models.User.findAll({ where: whereOr}).then(enter => {
+  models.User.findAll( {
+      where: { profile_id: 2 },
+      include: [{
+        model: models.Profile,
+        as : 'perfiles'
+      },{
+        model: models.Statu,
+        as : 'estatusUser'
+      }]
+  
+  }).then(enter => {
     res.json(enter)
   }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
 }

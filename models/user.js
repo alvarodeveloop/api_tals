@@ -50,7 +50,25 @@ module.exports = (sequelize, DataTypes) => {
       email_verify: { 
           type: DataTypes.BOOLEAN,
           default: false,
-        },         
-  })
+        },
+
+      statu_id: { 
+          type: DataTypes.INTEGER    
+          },  
+
+  });
+
+   User.associate = model => {
+      User.belongsTo(model.Profile,{
+        foreignKey: 'profile_id',
+        as : 'perfiles'
+      })
+
+       User.belongsTo(model.Statu,{
+        foreignKey: 'statu_id',
+        as : 'estatusUser'
+      })
+
+  }
     return User;
 };

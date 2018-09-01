@@ -49,6 +49,25 @@ function runserver(){
         } 
       })
 
+      models.Statu.findAll().then( function(statu) { 
+        if (statu) {
+           if (statu.length == 0){
+           models.Statu.create({id: 1, tipo_id: 1,  name : 'ACTIVO',      description: 'USUARIO ACTIVO' });
+           models.Statu.create({id: 2, tipo_id: 1,  name : 'DESACTIVADO', description: 'USUARIO DESACTIVADO' });
+           models.Statu.create({id: 3, tipo_id: 2,  name : 'ABIERTO',     description: 'TICKET ABIERTO' });
+           models.Statu.create({id: 4, tipo_id: 2,  name : 'EN ESPERA',   description: 'TICKET EN ESPERA' });
+           models.Statu.create({id: 5, tipo_id: 2,  name : 'CERRADO',     description: 'TICKET CERRADO' });
+           models.Statu.create({id: 6, tipo_id: 2,  name : 'ANULADO',     description: 'TICKET ANULADO' });
+           
+           resolve()
+          }
+          else
+          {
+            resolve() 
+          }
+        } 
+      })
+
 
         models.User.findAll().then( function(users) { 
           if (users) {
@@ -59,11 +78,14 @@ function runserver(){
 
              models.User.create({nombre : 'ADMINISTRADOR', correo: 'darwinerc92@gmail.com', 
                                  password :'$2b$10$Lq2iDGK5M2QvHAT./mxZv.hvVS.cvPWazNYVa3aKzFAA2H4gz15Em',
-                                 profile_id:1, tipo_profile_id: 1, email_verify: true});
+                                 profile_id:1, tipo_profile_id: 1, email_verify: true, statu_id: 1});
              }
           } 
 
         });
+
+
+
 
     });
     	
