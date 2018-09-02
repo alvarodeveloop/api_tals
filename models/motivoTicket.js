@@ -8,7 +8,11 @@ module.exports = (sequelize, DataTypes) => {
         },
   description: { 
           type: DataTypes.STRING    
-        },         
+        }, 
+  statu: { 
+          type: DataTypes.BOOLEAN,
+          default: true,
+        },              
   });
 
 

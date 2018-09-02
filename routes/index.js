@@ -17,8 +17,18 @@ const uploadPublicity = multer({ storage: storagePublicity   })
 
 const EnterpriseAdmin = require('../controllers/admin/enterprise')
 const Publicity = require('../controllers/admin/publicity')
+const Ticket = require('../controllers/ticket/ticket')
 const User = require('../controllers/user/user')
+const Maestro = require('../controllers/tals/maestro')
 var mdAuth = require('../middlewares/authenticated')
+
+
+
+
+//maestro del sistema
+api.get('/AdminMotivo', Maestro.allMotivo)
+api.get('/AdminStatu/:id', Maestro.statu)
+api.get('/AdminProfile/:id', Maestro.profile)
 
 //Controlador user
 //Recuperar contraseña
@@ -40,18 +50,34 @@ api.post('/login', User.login)
  api.delete('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroy)
 
 //modo de clientes registrados por empresa
- api.post('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.storedCliente)
+ api.post('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.storedClient)
  api.get('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.getClient)
- //api.get('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.findByIdClient)
- //api.put('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.updateClient)
- //api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
+ api.get('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.findByIdClient)
+ api.put('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.updateClient)
+ api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
 
-
+//publicty
  api.get('/publicityModule', mdAuth.ensureAuth,Publicity.get)
  api.get('/publicityModule/:id', mdAuth.ensureAuth,Publicity.findById)
  api.post('/publicityModule', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.stored)
  api.put('/publicityModule/:id', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.update)
  api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
+
+
+//ticket
+api.post('/ticketAdmin', mdAuth.ensureAuth,Ticket.stored)
+api.get('/ticketAdmin', mdAuth.ensureAuth,Ticket.get) // admin ve los tickets de las empresas
+api.get('/ticketAdmin/:id', mdAuth.ensureAuth,Ticket.findById)
+api.put('/ticketAdmin/:id', mdAuth.ensureAuth,Ticket.update)
+
+api.post('/ticketClient', mdAuth.ensureAuth,Ticket.storedClient)
+api.get('/ticketClient', mdAuth.ensureAuth,Ticket.getClient) //enviados por empresas o usuarios
+
+
+
+api.get('/ticketEnterprise', mdAuth.ensureAuth,Ticket.getEnterprise) //enviados por usuarios a las empresas
+
+
 
 
 

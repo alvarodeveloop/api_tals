@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   // 2 ticket
   // 3 publicidad
   // 4 items
-tipo_id: {
+  tipo_id: {
           type: DataTypes.INTEGER    
           },   
   name: { 
@@ -15,7 +15,11 @@ tipo_id: {
         },
   description: { 
           type: DataTypes.STRING    
-        },         
+        },
+  statu: { 
+          type: DataTypes.BOOLEAN,
+          default: false,
+        },
   });
 
    Statu.associate = model => {

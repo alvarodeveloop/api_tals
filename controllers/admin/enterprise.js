@@ -121,6 +121,7 @@ var Service = nodemailer.createTransport({
       
 }
 
+/* /////////////////////////////////////  buscar por id: una empresa ///////////////////////////////////////////////////////////// */
 function findById(req,res){
   models.User.findById(req.params.id).then(enter => {
 
@@ -129,6 +130,7 @@ function findById(req,res){
   }).error(err => res.status(500).json({ message: "error en la petición"} ))
 }
 
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 function update(req,res){
 
   if (req.body.statu_id === true){
@@ -176,7 +178,7 @@ function destroy(req,res){
 
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
-function storedCliente(req,res){
+function storedClient(req,res){
 
   models.User.findOne( {
       where: { correo: req.userCorreo }}).then(enter => {  
@@ -259,25 +261,111 @@ var Service = nodemailer.createTransport({
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 function getClient(req,res){
 
-   res.status(200).send({ message: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" });
+  //tipo_profile_id //para indicar que tipo de usuario
 
- /* models.User.findAll( {
-      where: { profile_id: 2 },
+  models.User.findOne( {
+      where: { correo: req.userCorreo }}).then(enter_id => {  
+     
+  models.User.findAll( {
+      where: { profile_id: 3, enterprise_id: enter_id.id},
+      attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id', 'email_verify'],
       include: [{
+        attributes: ['name'],
         model: models.Profile,
         as : 'perfiles'
       },{
+        attributes: ['name'],
         model: models.Statu,
         as : 'estatusUser'
       }]
   
   }).then(enter => {
+
+ 
     res.json(enter)
   }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
-*/
 
+   }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
 
 }
+
+
+
+/* /////////////////////////////////////  buscar por id: una empresa / cliente ///////////////////////////////////////////////////////////// */
+function findByIdClient(req,res){
+
+  models.User.findOne(
+    {
+      where: { id: req.params.id},
+      attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id','statu_id', 'email_verify'],
+      include: [{
+        attributes: ['name'],
+        model: models.Profile,
+        as : 'perfiles'
+      },{
+        attributes: ['name'],
+        model: models.Statu,
+        as : 'estatusUser'
+      }]
+  
+  }).then(enter => {
+
+    res.json(enter)
+
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+function updateClient(req,res){
+
+  if (req.body.statu_id === true){
+     req.body.statu_id = 1;
+  }else
+  {
+    req.body.statu_id = 2;
+  }
+
+  let whereOr = {
+    [models.Op.or]: [{
+      correo: req.body.correo,
+    },{
+      correo_ceo: req.body.correo_ceo
+    },{
+      rut: req.body.rut
+    },{
+      rut_ceo: req.body.rut_ceo
+    }],
+    id: { [models.Op.ne] : req.body.id }
+  }
+
+  models.User.findAll({ where: whereOr}).then(total => {
+    if(total.length > 0){
+      res.status(500).json({ message: "Ya esta en uso el correo o el correo del ceo o el rut o el rut del ceo"} )
+    }else{
+      models.User.update(req.body,{where: {id: req.params.id}}).then(enter => {
+        //res.json()
+        res.status(200).send({ message: "Registro Modificado correctamente" });
+      }).error(err => res.status(500).json({ message: "error en la petición"} ))
+    }
+  })
+
+      
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+function destroyClient(req,res){
+
+  const id = req.params.id
+
+  models.User.destroy({ where: { id }}).then(destroy => {
+    res.status(200).send({ message: "Registro Eliminado correctamente" });
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
 
 
@@ -287,6 +375,9 @@ module.exports = {
   findById,
   update,
   destroy,
-  storedCliente,
-  getClient
+  storedClient,
+  getClient,
+  findByIdClient,
+  updateClient,
+  destroyClient
 }
