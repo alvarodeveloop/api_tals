@@ -39,6 +39,14 @@ api.post('/login', User.login)
  api.put('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.update)
  api.delete('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroy)
 
+//modo de clientes registrados por empresa
+ api.post('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.storedCliente)
+ //api.get('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.getClient)
+ //api.get('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.findByIdClient)
+ //api.put('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.updateClient)
+ //api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
+
+
  api.get('/publicityModule', mdAuth.ensureAuth,Publicity.get)
  api.get('/publicityModule/:id', mdAuth.ensureAuth,Publicity.findById)
  api.post('/publicityModule', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.stored)

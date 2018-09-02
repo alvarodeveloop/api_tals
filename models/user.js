@@ -54,7 +54,12 @@ module.exports = (sequelize, DataTypes) => {
 
       statu_id: { 
           type: DataTypes.INTEGER    
-          },  
+          },
+      
+      //solo para los usuario profile tipo 3 de la de empresa
+      enterprise_id: { 
+          type: DataTypes.INTEGER    
+          },        
 
   });
 

@@ -39,7 +39,8 @@ function runserver(){
            models.TipoProfile.create({id: 2, profile_id: 2, name : 'EMPRESA BASICA', description: 'CON PUBLICIDAD IMPUESTA' });
            models.TipoProfile.create({id: 3, profile_id: 2, name : 'EMPRESA MEDIA', description: 'EMPRESA CON PUBLICIDAD MIXTA' });
            models.TipoProfile.create({id: 4, profile_id: 2, name : 'EMPRESA TOTAL', description: 'EMPRESA CON SU PROPIA PUBLICIDAD' });
-           models.TipoProfile.create({id: 5, profile_id: 3, name : 'USUARIO', description: 'USUARIO DEL SISTEMA' });
+           models.TipoProfile.create({id: 5, profile_id: 3, name : 'USUARIO REGISTRADO', description: 'USUARIO DEL SISTEMA REGISTRADO POR LA EMPRESA' });
+           models.TipoProfile.create({id: 6, profile_id: 3, name : 'USUARIO', description: 'USUARIO DEL SISTEMA' });
            resolve()
           }
           else

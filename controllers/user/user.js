@@ -51,7 +51,7 @@ function getProfile(req,res){
 
       if (enter.profile_id === 2)
       {
-      perfil_array.ceo = enter.ceo;
+       perfil_array.ceo = enter.ceo;
        perfil_array.rut_ceo = enter.rut_ceo;
        perfil_array.telefono_ceo = enter.telefono_ceo;
        perfil_array.correo_ceo = enter.correo_ceo;
@@ -250,7 +250,7 @@ function login(req, res) {
   models.User.findOne({ where: { correo: email, statu_id: 1}}).then(enter => {
 
    if (!enter) 
-      { res.status(500).send({ message: 'Error al comprobar usuario. verifiqué' }); }
+      { res.status(500).send({ message: 'Error al comprobar usuario o se encuentra desactivado. verifiqué' }); }
    else
       {
        bcrypt.compare(passemail, enter.password,  function(err, respuesta) {
@@ -264,7 +264,8 @@ function login(req, res) {
               user_array.correo = enter.correo; 
               user_array.profile = enter.profile_id;
               user_array.tipo_profile_id = enter.tipo_profile_id;
-
+              user_array.email_verify = enter.email_verify;
+              
                res.status(200).send({
                           user: user_array,
                           token: jwt.createToken(enter.dataValues)
