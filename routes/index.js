@@ -41,7 +41,7 @@ api.post('/login', User.login)
 
 //modo de clientes registrados por empresa
  api.post('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.storedCliente)
- //api.get('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.getClient)
+ api.get('/enterpriseClient', mdAuth.ensureAuth,EnterpriseAdmin.getClient)
  //api.get('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.findByIdClient)
  //api.put('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.updateClient)
  //api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
