@@ -186,7 +186,37 @@ function getEnterprise(req,res){
 
 }
 
+
+/* /////////////////////////////////// guardar ticket de cleintes de las empresas////////////////////////////////////////////////////*/
+
+function storedTicketRes(req,res){
+
+   models.User.findOne( {
+      where: { correo: req.userCorreo }}).then(enter_id => {  
+       
+    req.body.ticket_id = 1; //viene desde la vista
+    req.body.user_id = enter_id.id;
+  
+    models.TicketRes.create(req.body).then(stored => {
+
+        res.status(200).send({ message: "Su Ticket ha sido Respondido Correctamente"});
+
+    }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
+  
+ }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+
+}
+
+/* ////////////////////////////////////  get Tickets respuestas ///////////////////////////////////////////////////////////*/
+
+function getRes(req,res){
+
+  models.TicketRes.findAll( {where: { ticket_id: req.params.id } }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las respuestas. Verifiqué"}) )
+}
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 
 
 module.exports = {
@@ -196,5 +226,7 @@ module.exports = {
  update,
  storedClient,
  getClient,
- getEnterprise
+ getEnterprise,
+ storedTicketRes,
+ getRes
 }

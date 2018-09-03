@@ -73,10 +73,12 @@ api.put('/ticketAdmin/:id', mdAuth.ensureAuth,Ticket.update)
 api.post('/ticketClient', mdAuth.ensureAuth,Ticket.storedClient)
 api.get('/ticketClient', mdAuth.ensureAuth,Ticket.getClient) //enviados por empresas o usuarios
 
-
-
 api.get('/ticketEnterprise', mdAuth.ensureAuth,Ticket.getEnterprise) //enviados por usuarios a las empresas
 
+
+api.post('/ticketResAdmin', mdAuth.ensureAuth,Ticket.storedTicketRes)
+
+api.get('/ticketResAdmin/:id', mdAuth.ensureAuth,Ticket.getRes)
 
 
 

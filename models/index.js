@@ -48,7 +48,9 @@ const models = {
   MotivoTicket: sequelize.import('./motivoTicket'),
   //Item: sequelize.import('./item'),
 
-  Statu: sequelize.import('./statu')
+  Statu: sequelize.import('./statu'),
+
+  TicketRes: sequelize.import('./ticketRes')
 }; 
 
 
