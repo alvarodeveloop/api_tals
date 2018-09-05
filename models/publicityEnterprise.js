@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       id_enterprise: {
         type: DataTypes.INTEGER
+      },
+      statu: { 
+          type: DataTypes.BOOLEAN,
+          default: true,
       }
   },{underscored: true});
   
