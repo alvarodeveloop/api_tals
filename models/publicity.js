@@ -14,6 +14,10 @@ module.exports = (sequelize, DataTypes) => {
       },
       type_register:{
         type: DataTypes.STRING    
+      },
+      statu: { 
+          type: DataTypes.BOOLEAN,
+          default: true,
       }
   });
   

@@ -64,6 +64,10 @@ api.post('/login', User.login)
  api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
 
 
+//publicityEnterprise
+ api.get('/publicityEnterprise/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterprise)
+
+
 //ticket
 api.post('/ticketAdmin', mdAuth.ensureAuth,Ticket.stored)
 api.get('/ticketAdmin', mdAuth.ensureAuth,Ticket.get) // admin ve los tickets de las empresas
