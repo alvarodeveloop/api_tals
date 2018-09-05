@@ -1,0 +1,9 @@
+DROP TABLE codes;
+DROP TABLE publicity_enterprises;
+DROP TABLE publicity;
+DROP TABLE tickets;
+DROP TABLE motivo_tickets;
+DROP TABLE users;
+DROP TABLE profiles;
+DROP TABLE status;
+DROP TABLE tipo_profiles;

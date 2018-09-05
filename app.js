@@ -2,7 +2,6 @@ const express = require('express')
 const app     = express()
 const path = require('path')
 const bodyParser = require('body-parser')
-
 global.config = require('./config');
 
 app.use(bodyParser.urlencoded({ extended: false }));
