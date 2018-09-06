@@ -56,17 +56,17 @@ api.post('/login', User.login)
  api.put('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.updateClient)
  api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
 
+//publicityEnterprise
+ api.get('/publicityEnterprise/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterprise)
+ api.put('/PublicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.PublicityActivo)
+ api.put('/enterprisePublicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.PublicityEnterpriseActivo)
+
 //publicty
  api.get('/publicityModule', mdAuth.ensureAuth,Publicity.get)
  api.get('/publicityModule/:id', mdAuth.ensureAuth,Publicity.findById)
  api.post('/publicityModule', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.stored)
  api.put('/publicityModule/:id', mdAuth.ensureAuth,uploadPublicity.single('publicity'),Publicity.update)
  api.delete('/publicityModule/:id', mdAuth.ensureAuth,Publicity.destroy)
-
-
-//publicityEnterprise
- api.get('/publicityEnterprise/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterprise)
-
 
 //ticket
 api.post('/ticketAdmin', mdAuth.ensureAuth,Ticket.stored)
