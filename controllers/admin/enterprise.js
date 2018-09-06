@@ -35,7 +35,7 @@ function stored(req,res){
 
   var code = "";
       var lon = 15;
-      var chars = "0123456789ABCDEFGHIJLMNOPQRSTXYWZ!#$%&/()=[*:;";
+      var chars = "0123456789ABCDEFGHIJLMNOPQRSTXYWZ*#$";
 
       for (x=0; x < lon; x++)
       {
@@ -77,7 +77,11 @@ var Service = nodemailer.createTransport({
       from: global.config.correo.from,
         to: emailpassword,
         subject: 'Validación de cuenta',
-        text: 'Tú contraseña es '+emailpassword+ ' <br> para verificar su cuenta este es su codigo de verificación: '+code 
+        
+    html: 'Tú contraseña es '+emailpassword+ ' <br> para verificar su cuenta este es su codigo de verificación: '+code+
+    '<body> <p style="color:#FF0000";>Red paragraph text</p></body>'
+
+
       };
 
       Service.sendMail(mailOptions, function (error, info) {

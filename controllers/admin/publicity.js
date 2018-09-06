@@ -21,7 +21,7 @@ function stored(req,res){
 
   
   params.image = req.file.filename
-  params.register_type = 0
+  params.register_type = 1
   params.statu = true
   delete params.id
 
@@ -30,7 +30,29 @@ function stored(req,res){
       res.status(500).json({ message: "Ya esta en uso el nombre de esta publicidad" })
     }else{
       models.Publicity.create(params).then(stored => {
-        res.json({ publicity: stored })
+
+         models.User.findAll({ where: {profile_id: '2' }}).then(publicity => {
+
+          var emterprise_array ={};
+
+          if(publicity.length > 0){
+
+            publicity.forEach( function(element, index) {
+
+            emterprise_array.id_publicity = stored.id;
+            emterprise_array.id_enterprise = publicity.id;
+            emterprise_array.statu = true;
+
+            models.PublicityEnterprise.create(emterprise_array ).then(publicityenterprise => {
+              console.log("inserto correcto");
+            }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
+         
+            });
+          }
+
+         }).error(err => res.status(500).json({ message: "Error en Consulta Comuníquese con soporte"})) 
+
+         res.json({ publicity: stored })
       }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
 
     }
