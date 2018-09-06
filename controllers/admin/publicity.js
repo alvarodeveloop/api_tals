@@ -33,6 +33,7 @@ function stored(req,res){
 
          models.User.findAll({ where: {profile_id: '2' }}).then(publicity => {
 
+
           var emterprise_array ={};
 
           if(publicity.length > 0){
@@ -40,7 +41,7 @@ function stored(req,res){
             publicity.forEach( function(element, index) {
 
             emterprise_array.id_publicity = stored.id;
-            emterprise_array.id_enterprise = publicity.id;
+            emterprise_array.id_enterprise = element.id;
             emterprise_array.statu = true;
 
             models.PublicityEnterprise.create(emterprise_array ).then(publicityenterprise => {
