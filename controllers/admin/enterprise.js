@@ -200,7 +200,7 @@ function storedClient(req,res){
 
   var code = "";
       var lon = 15;
-      var chars = "0123456789ABCDEFGHIJLMNOPQRSTXYWZ!#$%&/()=[*:;";
+      var chars = "0123456789ABCDEFGHIJLMNOPQRSTXYWZ#$*";
 
       for (x=0; x < lon; x++)
       {
@@ -398,8 +398,25 @@ function publicityEnterprise(req,res){
 }
 
 
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+function PublicityEnterpriseActivo(req,res){
+      models.PublicityEnterprise.update(req.body,{where: {id: req.params.id}}).then(enter => {
+        //res.json()
+        res.status(200).send({ message: "Registro Modificado correctamente" });
+      }).error(err => res.status(500).json({ message: "error en la petición"} ))
+     
+}
 
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+function PublicityActivo(req,res){
+      models.Publicity.update(req.body,{where: {id: req.params.id}}).then(enter => {
+        //res.json()
+        res.status(200).send({ message: "Registro Modificado correctamente" });
+      }).error(err => res.status(500).json({ message: "error en la petición"} ))
+     
+}
 
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
@@ -414,5 +431,7 @@ module.exports = {
   findByIdClient,
   updateClient,
   destroyClient,
-  publicityEnterprise
+  publicityEnterprise,
+  PublicityEnterpriseActivo,
+  PublicityActivo
 }
