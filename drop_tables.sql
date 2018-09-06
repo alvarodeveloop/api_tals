@@ -7,3 +7,4 @@ DROP TABLE users;
 DROP TABLE profiles;
 DROP TABLE status;
 DROP TABLE tipo_profiles;
+DROP TABLE ticket_res;

@@ -4,8 +4,8 @@ const path = require('path')
 const bodyParser = require('body-parser')
 global.config = require('./config');
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
 app.use(express.static(path.join(__dirname,'public')))
 
 // configurar rutas
