@@ -52,6 +52,11 @@ function get(req,res){
       },{
         model: models.Statu,
         as : 'motivoEstatus'
+      },
+      {
+        attributes: ['nombre', 'correo'],
+        model: models.User,
+        as : 'userTicket'
       }]
   
   }).then(enter => {
