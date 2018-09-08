@@ -90,7 +90,17 @@ function update(req,res){
       res.status(500).json({ message: "Ya esta en uso el nombre de la publicidad"} )
     }else{
       models.Publicity.update(params,{where: {id: req.params.id}}).then(public => {
-        res.json()
+
+      //hacer update en la tabla PublicityEmprise
+      let params_publicity = {
+        statu: req.body.statu
+      }
+
+      models.PublicityEnterprise.update(params_publicity,{where: {id_publicity: req.params.id}}).then(public_public => {
+       console.log("update");
+      }).error(err => res.status(500).json({ message: "error en la petición"} ))  
+
+        res.status(200).send({ message: "Registro Modificado correctamente" });
       }).error(err => res.status(500).json({ message: "error en la petición"} ))
     }
   })

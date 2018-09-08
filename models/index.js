@@ -31,10 +31,10 @@ dialect: 'postgres',
 port: '5432'
 })
 
-/*
-const sequelize = new Sequelize("tals","postgres","admin", {  
+
+/*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
-port: '5432'
+port: '5434'
 })
 */
 
