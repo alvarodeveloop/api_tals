@@ -199,7 +199,7 @@ function storedTicketRes(req,res){
    models.User.findOne( {
       where: { correo: req.userCorreo }}).then(enter_id => {  
        
-    req.body.ticket_id = 1; //viene desde la vista
+    req.body.ticket_id = req.id_Ticket; //viene desde la vista
     req.body.user_id = enter_id.id;
   
     models.TicketRes.create(req.body).then(stored => {
