@@ -198,11 +198,18 @@ function storedTicketRes(req,res){
 
    models.User.findOne( {
       where: { correo: req.userCorreo }}).then(enter_id => {  
-       
-    req.body.ticket_id = req.id_Ticket; //viene desde la vista
-    req.body.user_id = enter_id.id;
+
+    //console.log(req.body,'aquii')
+    //return false
+    let body = req.body
+
+    let params = {
+      ticket_id: body.idTicket,
+      user_id  : enter_id.id,
+      description : body.description
+    }
   
-    models.TicketRes.create(req.body).then(stored => {
+    models.TicketRes.create(params).then(stored => {
 
         res.status(200).send({ message: "Su Ticket ha sido Respondido Correctamente"});
 
