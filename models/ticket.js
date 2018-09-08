@@ -50,6 +50,11 @@ module.exports = (sequelize, DataTypes) => {
         as : 'userTicket'
       }) 
 
+      Ticket.hasMany(model.TicketRes,{
+        foreignKey: 'ticket_id',
+        as : 'ticketResticket'
+      })
+
   }
   
     return Ticket; 

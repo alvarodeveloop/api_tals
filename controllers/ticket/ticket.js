@@ -216,9 +216,27 @@ function storedTicketRes(req,res){
 
 function getRes(req,res){
 
-  models.TicketRes.findAll( {where: { ticket_id: req.params.id } }).then(enter => {
+   models.Ticket.findAll( {
+      where: { id: req.params.id },
+      include: [{
+        model: models.MotivoTicket,
+        as : 'motivo'
+      },{
+        model: models.Statu,
+        as : 'motivoEstatus'
+      },{
+        attributes: ['nombre', 'correo'],
+        model: models.User,
+        as : 'userTicket'
+      },{
+        model: models.TicketRes,
+        as : 'ticketResticket'
+      }]
+  
+  }).then(enter => {
     res.json(enter)
-  }).error(err => res.status(500).json({ message: "error al buscar las respuestas. Verifiqué"}) )
+  }).error(err => res.status(500).json({ message: "error al buscar los tickets. Verifiqué"}) )
+
 }
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 

@@ -14,6 +14,15 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING    
         },         
   });
+
+  TicketRes.associate = model => {
+  
+      TicketRes.belongsTo(model.TicketRes,{
+        foreignKey: 'ticket_id',
+        as : 'ticketResticket'
+      })
+
+  }
   
     return TicketRes; 
 
