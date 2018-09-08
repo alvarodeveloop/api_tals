@@ -26,16 +26,16 @@ port: '5432'
 })
 */
 // api local 
-/*const sequelize = new Sequelize("tals","postgres","123456", {  
+const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5434'
 })
-*/
-const sequelize = new Sequelize("tals","postgres","admin", {  
+
+/*const sequelize = new Sequelize("tals","postgres","admin", {  
 dialect: 'postgres',
 port: '5432'
 })
-
+*/
 
 const models = {
   User: sequelize.import('./user'),
