@@ -9,7 +9,7 @@ function storedClient(req,res){
 
   req.body.correo = req.body.correo.toLowerCase();
   var emailpassword = req.body.correo;
-  req.body.password = bcrypt.hashSync(req.body.correo, 10);
+  req.body.password = bcrypt.hashSync(req.body.password, 10);
 
   req.body.profile_id = 3;
   req.body.statu_id = 1;
