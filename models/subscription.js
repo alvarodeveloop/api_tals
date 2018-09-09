@@ -22,5 +22,11 @@ module.exports = (sequelize, DataTypes) => {
         }, 
   });
 
+    Subscription.associate = model => {
+       Subscription.hasMany(model.SubscriptionEnterprise,{
+        foreignKey: 'id_subscription',
+        as : 'subscripciones'
+      })
+    }
     return Subscription; 
 };

@@ -89,11 +89,11 @@ function findById(req,res){
 
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 function update(req,res){
-
-      models.Ticket.update(req.body,{where: {id: req.params.id}}).then(enter => {
-        res.status(200).send({ message: "Registro Modificado correctamente" });
-      }).error(err => res.status(500).json({ message: "error en la petición"} ))
-      
+  
+  models.Ticket.update(req.body,{where: {id: req.params.id}}).then(enter => {
+    res.status(200).send({ message: "Registro Modificado correctamente" });
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+  
 }
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
@@ -199,8 +199,6 @@ function storedTicketRes(req,res){
    models.User.findOne( {
       where: { correo: req.userCorreo }}).then(enter_id => {  
 
-    //console.log(req.body,'aquii')
-    //return false
     let body = req.body
 
     let params = {

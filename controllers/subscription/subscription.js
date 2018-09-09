@@ -5,14 +5,9 @@ const models = require('../../models/')
 
 function stored(req,res){
     req.body.activo = true;
-   
-    let whereOr = {
-    [models.Op.or]: [{
-      titulo: req.body.titulo,
-    }]
-  }
 
-   models.Subscription.findAll({ where: whereOr}).then(total => {
+
+   models.Subscription.findAll({ where: {titulo: req.body.titulo} }).then(total => {
     if(total.length > 0){
       res.status(500).json({ message: "Ya esta en uso el Título"} )
     }else{
@@ -28,7 +23,16 @@ function stored(req,res){
 
 /*******************************************************************************/
 function get(req,res){
-  models.Subscription.findAll().then(subscription => {
+  models.Subscription.findAll({
+    include: [
+      {
+        model: models.SubscriptionEnterprise, 
+        as : 'subscripciones',
+        where: {statu: true},
+        required: false
+      }
+    ]
+  }).then(subscription => {
     res.json(subscription)
   }).error(err => res.status(500).json({ message: "error al buscar los registros"}) )
 }
