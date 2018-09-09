@@ -58,6 +58,7 @@ api.post('/login', User.login)
 
 //publicityEnterprise
  api.get('/publicityEnterprise/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterprise)
+ api.get('/enterprisePublicity', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterpriseId)
  api.put('/PublicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.PublicityActivo)
  api.put('/enterprisePublicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.PublicityEnterpriseActivo)
 

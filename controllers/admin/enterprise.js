@@ -399,6 +399,37 @@ function publicityEnterprise(req,res){
 
 
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+function publicityEnterpriseId(req,res){
+
+  models.User.findOne( {
+      where: { correo: req.userCorreo }}).then(enter_id => { 
+
+  models.PublicityEnterprise.findAll(
+    {
+      where: { id_enterprise: enter_id.id},
+      include: [{
+        model: models.Publicity,
+        as : 'publicidades'
+      },
+      {
+        attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id','statu_id', 'email_verify'],
+        model: models.User,
+        as : 'empresas'
+      }
+      ]
+  
+  }).then(enter => {
+
+    res.json({publicempresa: enter })
+
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+
+   }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 
 function PublicityEnterpriseActivo(req,res){
       models.PublicityEnterprise.update(req.body,{where: {id: req.params.id}}).then(enter => {
@@ -432,6 +463,7 @@ module.exports = {
   updateClient,
   destroyClient,
   publicityEnterprise,
+  publicityEnterpriseId,
   PublicityEnterpriseActivo,
   PublicityActivo
 }
