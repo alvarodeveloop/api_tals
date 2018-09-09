@@ -276,6 +276,7 @@ function login(req, res) {
     }).error(err => res.status(500).json({ message: "Error en Consulta Comuníquese con soporte"}) )
 }
 
+/*******************************************************************************/
 module.exports = {
   updateProfile,
   getProfile,

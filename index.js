@@ -20,9 +20,9 @@ function runserver(){
     	models.Profile.findAll().then( function(profiles) { 
         if (profiles) {
            if (profiles.length == 0){
-           models.Profile.create({name : 'ADMIN', description: 'ADMINISTRADOR DEL SISTEMA' });
-           models.Profile.create({name : 'EMPRESA', description: 'EMPRESAS DEL SISTEMA' });
-           models.Profile.create({name : 'USUARIO', description: 'USUARIOS' });
+           models.Profile.create({id: 1, name : 'ADMIN', description: 'ADMINISTRADOR DEL SISTEMA' });
+           models.Profile.create({id: 2, name : 'EMPRESA', description: 'EMPRESAS DEL SISTEMA' });
+           models.Profile.create({id: 3, name : 'USUARIO', description: 'USUARIOS' });
            resolve()
           }
           else

@@ -19,6 +19,7 @@ const EnterpriseAdmin = require('../controllers/admin/enterprise')
 const Publicity = require('../controllers/admin/publicity')
 const Ticket = require('../controllers/ticket/ticket')
 const User = require('../controllers/user/user')
+const Client = require('../controllers/client/client')
 const Maestro = require('../controllers/tals/maestro')
 var mdAuth = require('../middlewares/authenticated')
 
@@ -82,10 +83,12 @@ api.get('/ticketEnterprise', mdAuth.ensureAuth,Ticket.getEnterprise) //enviados 
 
 
 api.post('/ticketResAdmin', mdAuth.ensureAuth,Ticket.storedTicketRes)
-
 api.get('/ticketResAdmin/:id', mdAuth.ensureAuth,Ticket.getRes)
 
 
+
+//clientes registrados por su cuenta
+api.post('/clientEnterprise', Client.storedClient)
 
 
 
