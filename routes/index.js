@@ -20,6 +20,7 @@ const Publicity = require('../controllers/admin/publicity')
 const Ticket = require('../controllers/ticket/ticket')
 const User = require('../controllers/user/user')
 const Client = require('../controllers/client/client')
+const Subscription = require('../controllers/subscription/subscription')
 const Maestro = require('../controllers/tals/maestro')
 var mdAuth = require('../middlewares/authenticated')
 
@@ -89,6 +90,17 @@ api.get('/ticketResAdmin/:id', mdAuth.ensureAuth,Ticket.getRes)
 
 //clientes registrados por su cuenta
 api.post('/clientEnterprise', Client.storedClient)
+
+
+//clientes registrados por su cuenta
+api.post('/SubscriptionEnterprise', Subscription.stored)
+
+
+api.post('/SubscriptionEnterprise', mdAuth.ensureAuth,Subscription.stored)
+api.get('/SubscriptionEnterprise', mdAuth.ensureAuth,Subscription.get) // admin ve los tickets de las empresas
+api.get('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.findById)
+api.put('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.update)
+api.delete('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.destroy)
 
 
 

@@ -48,8 +48,8 @@ const models = {
   //Item: sequelize.import('./item'),
   Statu: sequelize.import('./statu'),
   TicketRes: sequelize.import('./ticketRes'),
-  Sucription: sequelize.import('./Sucription'),
-  SucriptionEnterprise: sequelize.import('./sucriptionEnterprise'),
+  Subscription: sequelize.import('./subscription'),
+  SubscriptionEnterprise: sequelize.import('./subscriptionEnterprise'),
 }; 
 
 

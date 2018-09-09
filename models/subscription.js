@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const Sucription = sequelize.define("sucription", {
+  const Subscription = sequelize.define("subscription", {
 
  titulo: { 
           type: DataTypes.STRING    
@@ -22,5 +22,5 @@ module.exports = (sequelize, DataTypes) => {
         }, 
   });
 
-    return Sucription; 
+    return Subscription; 
 };

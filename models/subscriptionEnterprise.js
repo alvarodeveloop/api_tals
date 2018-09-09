@@ -2,9 +2,9 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const SucriptionEnterprise = sequelize.define("sucription_enterprise", {
+  const SubscriptionEnterprise = sequelize.define("subscription_enterprise", {
       
-      id_sucription: { 
+      id_subscription: { 
             type: DataTypes.INTEGER    
       },
       
@@ -22,6 +22,6 @@ module.exports = (sequelize, DataTypes) => {
   });
   
 
-  return SucriptionEnterprise;
+  return SubscriptionEnterprise;
 
 };  
