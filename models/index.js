@@ -31,14 +31,11 @@ dialect: 'postgres',
 port: '5432'
 })
 
-
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5434'
 })
 */
-
-
 const models = {
   User: sequelize.import('./user'),
   Publicity: sequelize.import('./publicity'),
@@ -49,10 +46,10 @@ const models = {
   Ticket: sequelize.import('./ticket'),
   MotivoTicket: sequelize.import('./motivoTicket'),
   //Item: sequelize.import('./item'),
-
   Statu: sequelize.import('./statu'),
-
-  TicketRes: sequelize.import('./ticketRes')
+  TicketRes: sequelize.import('./ticketRes'),
+  Sucription: sequelize.import('./Sucription'),
+  SucriptionEnterprise: sequelize.import('./sucriptionEnterprise'),
 }; 
 
 
