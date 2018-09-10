@@ -46,5 +46,6 @@ function statuClient(req,res){
 module.exports = {
  allMotivo,
  statu,
+ statuClient,
  profile
 }
