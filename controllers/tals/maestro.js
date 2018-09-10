@@ -24,6 +24,16 @@ function statu(req,res){
   }).error(err => res.status(500).json({ message: "error en la petición"} ))
  }
 
+
+ /* /////////////////////////////////// status del sistema 1 Usuarios / 2 tickest ////////////////////////////////////////////////////*/
+
+function statuClient(req,res){
+ models.Statu.findAll({where: { tipo_id: req.params.id, id: 6}
+  }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+ }
+
   /* /////////////////////////////////// status del sistema 1 Usuarios / 2 tickest ////////////////////////////////////////////////////*/
 
  function profile(req,res){

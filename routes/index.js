@@ -30,6 +30,7 @@ var mdAuth = require('../middlewares/authenticated')
 //maestro del sistema
 api.get('/AdminMotivo', Maestro.allMotivo)
 api.get('/AdminStatu/:id', Maestro.statu)
+api.get('/AdminStatuClient/:id', Maestro.statuClient)
 api.get('/AdminProfile/:id', Maestro.profile)
 
 //Controlador user
