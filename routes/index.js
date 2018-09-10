@@ -102,6 +102,7 @@ api.get('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.findById)
 api.put('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.update)
 api.delete('/SubscriptionEnterprise/:id', mdAuth.ensureAuth,Subscription.destroy)
 
+api.get('/Subscription', mdAuth.ensureAuth,Subscription.getSubscription)
 
 
 module.exports = api

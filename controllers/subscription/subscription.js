@@ -79,11 +79,20 @@ function findById(req,res){
 }
 
 /* ------------------------------------------------------------------------------------- */
+/*******************************************************************************/
+function getSubscription(req,res){
+  models.Subscription.findAll({ where: {activo: true}}).then(subscription => {
+    res.json(subscription)
+  }).error(err => res.status(500).json({ message: "error al buscar los registros"}) )
+}
+
+/******************************************************************************/
 
 module.exports = {
   stored,
   get,
   update,
   destroy,
-  findById
+  findById,
+  getSubscription
 }
