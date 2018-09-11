@@ -119,7 +119,7 @@ function storedClient(req,res){
     code = code+'-'+enter_id.id;
          
     req.body.numero_ticket = code;
-    req.body.tipo_id = 2;
+    req.body.tipo_id = 1;
     req.body.user_id = enter_id.id;
     req.body.enterprise_id = enter_id.enterprise_id;
     req.body.statu_id = 3;
