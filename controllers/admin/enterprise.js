@@ -273,7 +273,7 @@ function getClient(req,res){
      
   models.User.findAll( {
       where: { profile_id: 3, enterprise_id: enter_id.id},
-      attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id', 'email_verify'],
+      attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id', 'email_verify', 'statu_id'],
       include: [{
         attributes: ['name'],
         model: models.Profile,

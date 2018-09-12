@@ -239,6 +239,9 @@ function getRes(req,res){
       }]
   
   }).then(enter => {
+
+    //update para quitarle el visto a false a true;
+
     res.json(enter)
   }).error(err => res.status(500).json({ message: "error al buscar los tickets. Verifiqué"}) )
 
