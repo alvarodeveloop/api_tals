@@ -203,7 +203,7 @@ function storedClient(req,res){
       res.status(500).json({ message: "Ya esta en uso el correo o el correo del ceo o el rut o el rut del ceo" })
     }else{
       models.User.create(req.body).then(stored => {
-        
+
       }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
 
     }
