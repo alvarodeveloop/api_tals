@@ -3,8 +3,8 @@ var Sequelize = require('sequelize');
 
 // api heroku 
 
-const sequelize = new Sequelize("d3prcq0la5lno8","zaikedvxmianpt","3b8ecaea65a6262d3aae7193c2e236a840c9adb0a0b143a7bbf6183955ea8d0f", {  
-host: 'ec2-54-235-242-63.compute-1.amazonaws.com',  
+const sequelize = new Sequelize("d6r5m7klc5184d","fnzzpnlymgmwen","466b124d0e21e0515bf80fd764c51668ef5d3a59ce0d3b06392c757f75f78a0c", {  
+host: 'ec2-54-225-97-112.compute-1.amazonaws.com',  
 dialect: 'postgres',
 port: '5432'
 })
