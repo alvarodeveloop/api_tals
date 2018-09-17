@@ -1,5 +1,6 @@
 
 const models = require('../../models/')
+const fs = require('fs');
 
 /* ////////////////////////////////////  Get animation ///////////////////////////////////////////////////////////*/
 
@@ -24,9 +25,11 @@ function stored(req,res){
 
   let params = req.body
 
-  req.body.status = true;
-  req.body.user_id = enter_id.id;
-  
+  params.imagen = req.imagen.filename
+  params.audio = req.audio.filename
+  params.status = true
+  params.user_id = enter_id.id
+
   models.Animation.findAll({ where: {name: params.name }}).then(total => {
     if(total.length > 0){
       res.status(500).json({ message: "Ya esta en uso el nombre de esta Animación" })
