@@ -2,23 +2,23 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const Item = sequelize.define("item", {
-  
-  ruta_foto: { 
+  const Animation = sequelize.define("animation", {
+    
+  name: { 
           type: DataTypes.STRING    
-        },    
-  ruta_imagen: { 
-          type: DataTypes.STRING    
-        },
-  ruta_audio: { 
+        },  
+  imagen: { 
           type: DataTypes.STRING    
         },
-  texto_item: { 
+  audio: { 
+          type: DataTypes.STRING    
+        },
+  texto: { 
           type: DataTypes.STRING    
         },             
-  status_id: { 
+  status: { 
           type: DataTypes.BOOLEAN,
-          default: false,    
+          default: true,    
         }, 
   user_id: { 
           type: DataTypes.INTEGER    
@@ -26,5 +26,12 @@ module.exports = (sequelize, DataTypes) => {
 
   });
 
-    return Item; 
+Animation.associate = model => {
+      Animation.hasMany(model.AnimationImagen,{
+        foreignKey: 'animation_id',
+        as : 'animationImg'
+      })
+
+  }
+    return Animation; 
 };
