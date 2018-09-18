@@ -24,9 +24,10 @@ function stored(req,res){
       where: { correo: req.userCorreo }}).then(enter_id => {  
 
   let params = req.body
-
-  params.imagen = req.imagen.filename
-  params.audio = req.audio.filename
+  
+  
+  params.imagen = req.files.animacion[0].filename
+  params.audio = req.files.audio[0].filename
   params.status = true
   params.user_id = enter_id.id
 

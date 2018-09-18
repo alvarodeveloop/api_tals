@@ -10,7 +10,6 @@ const storagePublicity = multer.diskStorage({
     cb(null, 'public/publicity')
   },
   filename: function (req, file, cb) {
-    
     cb(null,  Date.now()+'-'+file.originalname)
   }
 })
@@ -21,7 +20,6 @@ const storageAnimation = multer.diskStorage({
     cb(null, 'public/animation')
   },
   filename: function (req, file, cb) {
-   
     cb(null,  Date.now()+'-'+file.originalname)
   }
 })
@@ -31,7 +29,6 @@ const storageAudio = multer.diskStorage({
     cb(null, 'public/animation')
   },
   filename: function (req, file, cb) {
-   
     cb(null,  Date.now()+'-'+file.originalname)
   }
 })
@@ -39,7 +36,7 @@ const storageAudio = multer.diskStorage({
 
 const uploadPublicity = multer({ storage: storagePublicity })
 const uploadAnimation = multer({ storage: storageAnimation }) //imagen referencial
-const uploadAudio = multer({ storage: storageAudio }) //audio mp3
+const uploadAudio     = multer({ storage: storageAudio }) //audio mp3
 
 
 const EnterpriseAdmin = require('../controllers/admin/enterprise')
@@ -139,9 +136,16 @@ api.get('/Subscription', mdAuth.ensureAuth,Subscription.getSubscription)
 api.get('/Animations', mdAuth.ensureAuth,Animation.get)
 
 
-api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.single('imagen'),uploadAudio.single('audio'),Animation.stored)
+api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
+    {
+      name: "animacion"
+    },
+    {
+      name: "audio"
+    }
+  ]),Animation.stored)
 
-api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimation.single('imagenes'),Animation.storedImagenes)
+//api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimation.single('imagenes'),Animation.storedImagenes)
 
 
 
