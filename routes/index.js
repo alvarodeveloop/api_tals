@@ -32,11 +32,22 @@ const storageAudio = multer.diskStorage({
     cb(null,  Date.now()+'-'+file.originalname)
   }
 })
+
+const storageAnimationImagen = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/animationImagen')
+  },
+  filename: function (req, file, cb) {
+    cb(null,  Date.now()+'-'+file.originalname)
+  }
+})
 /*//////////////////////////////////////////////////////////////////////////////////////*/
 
 const uploadPublicity = multer({ storage: storagePublicity })
 const uploadAnimation = multer({ storage: storageAnimation }) //imagen referencial
 const uploadAudio     = multer({ storage: storageAudio }) //audio mp3
+const uploadAnimationImagen     = multer({ storage: storageAnimationImagen }) //audio mp3
+
 
 
 const EnterpriseAdmin = require('../controllers/admin/enterprise')
@@ -145,7 +156,8 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
     }
   ]),Animation.stored)
 
-//api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimation.single('imagenes'),Animation.storedImagenes)
+
+ api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimationImagen.array('imagenes', 12),Animation.storedImagenes)
 
 
 

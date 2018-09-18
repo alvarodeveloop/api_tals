@@ -49,13 +49,19 @@ function stored(req,res){
 
 function storedImagenes(req,res){
 
-    req.body.ruta_imagen = "imagen1.png";
-    req.body.animation_id = 3;
-    req.body.status = true;
+   let params = req.body
+   params.status = true;
 
-    models.AnimationImagen.create(req.body).then(stored => {
-        res.status(200).send({ message: "-------"+stored.id});
+   req.files.imagenes.forEach( function(element, index) {
+
+    params.ruta_imagen = element.filename;
+
+    models.AnimationImagen.create(params).then(stored => {
+      console.log("registro");
     }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
+
+   }); 
+    res.status(200).send({ message: "Imagenes subidas correctamente"});
 }
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
