@@ -13,7 +13,7 @@ function get(req,res){
 
    }).then(enter => {
     res.json(enter)
-  }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )
 }
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
@@ -66,8 +66,26 @@ function storedImagenes(req,res){
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
 
+function findById(req,res){
+  
+  models.Animation.findOne( { where: { id: req.params.id },
+    include: [{
+        model: models.AnimationImagen,
+        as : 'animationImg'
+      }]
+
+   }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )
+
+}
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////*/
+
 module.exports = {
  get,
  stored,
- storedImagenes
+ storedImagenes,
+ findById
 }

@@ -157,8 +157,9 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
   ]),Animation.stored)
 
 
- api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimationImagen.array('imagenes', 12),Animation.storedImagenes)
+ api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimationImagen.array('imagenes', 50),Animation.storedImagenes)
 
+ api.get('/Animations/:id', mdAuth.ensureAuth,Animation.findById)
 
 
 module.exports = api
