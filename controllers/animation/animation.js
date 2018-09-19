@@ -82,10 +82,31 @@ function findById(req,res){
 
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
+function updateAudio(req,res){
+  let params = req.body
+  
+  if(req.file !== undefined){
+    params.audio = req.file.filename
+  }
+ 
+  models.Animation.findOne( { where: { id: req.params.id }}).then(enter => {
+    const filePath = 'public/animation/'+enter.audio; 
+    fs.unlinkSync(filePath);
+  
+  models.Animation.update(params,{where: {id: req.params.id}}).then(public => {
+   res.status(200).send({ message: "Registro Modificado correctamente" });
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+  
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )    
+}
+/* ///////////////////////////////////////////////////////////////////////////////////*/
+
+
 
 module.exports = {
  get,
  stored,
  storedImagenes,
- findById
+ findById,
+ updateAudio
 }

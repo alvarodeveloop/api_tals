@@ -161,5 +161,7 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
 
  api.get('/Animations/:id', mdAuth.ensureAuth,Animation.findById)
 
+ api.put('/AnimationsAudio/:id', mdAuth.ensureAuth,uploadAnimation.single('audio'),Animation.updateAudio)
+
 
 module.exports = api
