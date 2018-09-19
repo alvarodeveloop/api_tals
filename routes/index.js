@@ -146,7 +146,6 @@ api.get('/Subscription', mdAuth.ensureAuth,Subscription.getSubscription)
 //Animations
 api.get('/Animations', mdAuth.ensureAuth,Animation.get)
 
-
 api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
     {
       name: "animacion"
@@ -156,12 +155,9 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
     }
   ]),Animation.stored)
 
-
  api.post('/AnimationsImagen', mdAuth.ensureAuth,uploadAnimationImagen.array('imagenes', 50),Animation.storedImagenes)
-
  api.get('/Animations/:id', mdAuth.ensureAuth,Animation.findById)
-
  api.put('/AnimationsAudio/:id', mdAuth.ensureAuth,uploadAnimation.single('audio'),Animation.updateAudio)
-
+ api.put('/AnimationsAnimacion/:id', mdAuth.ensureAuth,uploadAnimation.single('animacion'),Animation.updateAnimacion)
 
 module.exports = api
