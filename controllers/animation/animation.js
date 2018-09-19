@@ -52,7 +52,7 @@ function storedImagenes(req,res){
    let params = req.body
    params.status = true;
 
-   req.files.imagenes.forEach( function(element, index) {
+   req.files.forEach( function(element, index) {
 
     params.ruta_imagen = element.filename;
 
