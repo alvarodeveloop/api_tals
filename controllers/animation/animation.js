@@ -129,6 +129,24 @@ function updateTexto(req,res){
   
 }
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+function destroyOne(req,res){
+
+  const id = req.params.id
+
+  models.AnimationImagen.findById(id).then(publi => {
+    
+    const filePath = 'public/animationImagen/'+publi.dataValues.ruta_imagen; 
+
+    models.AnimationImagen.destroy({ where: { id }}).then(destroy => {
+      fs.unlinkSync(filePath);
+      res.status(200).send({ message: "Foto eliminada correctamente" });
+    }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
+
+  }).error(err => res.status(500).json({ message: "Error, por favor contacte a soporte"} ) )
+}
+/* ///////////////////////////////////////////////////////////////////// */
+
+
 
 module.exports = {
  get,
@@ -137,5 +155,6 @@ module.exports = {
  findById,
  updateAudio,
  updateAnimacion,
- updateTexto
+ updateTexto,
+ destroyOne
 }

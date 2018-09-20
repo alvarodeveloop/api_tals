@@ -161,4 +161,7 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
  api.put('/AnimationsAnimacion/:id', mdAuth.ensureAuth,uploadAnimation.single('animacion'),Animation.updateAnimacion)
  api.put('/AnimationsTexto/:id', mdAuth.ensureAuth,Animation.updateTexto)
 
+ api.delete('/AnimationsOne/:id', mdAuth.ensureAuth,Animation.destroyOne)
+
+
 module.exports = api
