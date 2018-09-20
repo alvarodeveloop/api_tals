@@ -170,6 +170,42 @@ function destroyAll(req,res){
 }
 /* /////////////////////////////////////////////////////////////////////////////////////7 */
 
+function destroy(req,res){
+  const id = req.params.id
+   models.AnimationImagen.findAll( {
+      where: { animation_id: id },
+   }).then(total => {
+     if(total.length < 0){
+      res.status(500).json({ message: "Las imagenes no se encuentran. Verifique"} )
+    }else
+    {
+      total.forEach( function(element, index) {
+        const filePath = 'public/animationImagen/'+element.ruta_imagen; 
+
+      models.AnimationImagen.destroy({ where: { id: element.id }}).then(destroy => {
+        fs.unlinkSync(filePath);
+      }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
+    });
+
+     //hacer una promesa de eliminar
+      models.Animation.findOne( { where: { id: id }}).then(enter_id => { 
+
+      const filePathAudio = 'public/animation/'+enter_id.audio; 
+      const filePathAnimacion = 'public/animation/'+enter_id.imagen;  
+
+      models.Animation.destroy({ where: { id }}).then(destroy => {
+         //eliminar audio, animation
+        fs.unlinkSync(filePathAudio);
+        fs.unlinkSync(filePathAnimacion);
+        res.status(200).send({ message: "Animación eliminada correctamente" }); 
+      }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
+     
+      }).error(err => res.status(500).json({ message: "error en la petición. Verifiqué y comuníquese con soporte"}) )
+    }
+  }).error(err => res.status(500).json({ message: "error al buscar las Imagenes. Verifiqué"}) )
+}
+/* /////////////////////////////////////////////////////////////////////////////////////7 */
+
 module.exports = {
  get,
  stored,
@@ -179,5 +215,6 @@ module.exports = {
  updateAnimacion,
  updateTexto,
  destroyOne,
- destroyAll
+ destroyAll,
+ destroy
 }
