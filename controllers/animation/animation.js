@@ -146,9 +146,29 @@ function destroyOne(req,res){
 
   }).error(err => res.status(500).json({ message: "Error, por favor contacte a soporte"} ) )
 }
-/* ///////////////////////////////////////////////////////////////////// */
 
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+function destroyAll(req,res){
+  const id = req.params.id
+   models.AnimationImagen.findAll( {
+      where: { animation_id: id },
+   }).then(total => {
+     if(total.length < 0){
+      res.status(500).json({ message: "Las imagenes no se encuentran. Verifique"} )
+    }else
+    {
+      total.forEach( function(element, index) {
+        const filePath = 'public/animationImagen/'+element.ruta_imagen; 
 
+      models.AnimationImagen.destroy({ where: { id: element.id }}).then(destroy => {
+        fs.unlinkSync(filePath);
+      }).error(err => res.status(500).json({ message: "error en la petición, por favor contacte a soporte"} ))
+    });  
+      res.status(200).send({ message: "Foto eliminada correctamente" }); 
+    }
+  }).error(err => res.status(500).json({ message: "error al buscar las Imagenes. Verifiqué"}) )
+}
+/* /////////////////////////////////////////////////////////////////////////////////////7 */
 
 module.exports = {
  get,
@@ -158,5 +178,6 @@ module.exports = {
  updateAudio,
  updateAnimacion,
  updateTexto,
- destroyOne
+ destroyOne,
+ destroyAll
 }
