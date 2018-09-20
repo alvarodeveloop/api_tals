@@ -94,7 +94,9 @@ function updateAudio(req,res){
     fs.unlinkSync(filePath);
   
   models.Animation.update(params,{where: {id: req.params.id}}).then(public => {
-   res.status(200).send({ message: "Registro Modificado correctamente", audio : public.audio });
+    
+  res.status(200).json({ audio : params.audio, message: "Registro Modificado correctamente" });
+  
   }).error(err => res.status(500).json({ message: "error en la petición"} ))
   
   }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )    
@@ -113,8 +115,8 @@ function updateAnimacion(req,res){
     fs.unlinkSync(filePath);
   
   models.Animation.update(params,{where: {id: req.params.id}}).then(public => {
-   res.status(200).send({ message: "Registro Modificado correctamente", aminacion: public.amimacion });
-  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+   res.status(200).json({ aminacion : params.imagen, message: "Registro Modificado correctamente" });
+   }).error(err => res.status(500).json({ message: "error en la petición"} ))
   
   }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )    
 }
