@@ -159,5 +159,6 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
  api.get('/Animations/:id', mdAuth.ensureAuth,Animation.findById)
  api.put('/AnimationsAudio/:id', mdAuth.ensureAuth,uploadAnimation.single('audio'),Animation.updateAudio)
  api.put('/AnimationsAnimacion/:id', mdAuth.ensureAuth,uploadAnimation.single('animacion'),Animation.updateAnimacion)
+ api.put('/AnimationsTexto/:id', mdAuth.ensureAuth,Animation.updateTexto)
 
 module.exports = api

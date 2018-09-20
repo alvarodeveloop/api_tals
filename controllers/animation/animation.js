@@ -120,7 +120,15 @@ function updateAnimacion(req,res){
   
   }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )    
 }
-/* ///////////////////////////////////////////////////////////////////////////////////*/
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+function updateTexto(req,res){
+  
+  models.Animation.update(req.body,{where: {id: req.params.id}}).then(enter => {
+    res.status(200).send({ message: "Registro Modificado correctamente" });
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+  
+}
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 module.exports = {
  get,
@@ -128,5 +136,6 @@ module.exports = {
  storedImagenes,
  findById,
  updateAudio,
- updateAnimacion
+ updateAnimacion,
+ updateTexto
 }
