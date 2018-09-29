@@ -18,6 +18,21 @@ function get(req,res){
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
 
+function getViews(req,res){
+  models.Animation.findAll( { where: { status: true },
+    include: [{
+        model: models.AnimationImagen,
+        as : 'animationImg',
+        required:true
+      }]
+
+   }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////*/
+
 function stored(req,res){
   
   models.User.findOne( {
@@ -208,6 +223,7 @@ function destroy(req,res){
 
 module.exports = {
  get,
+ getViews,
  stored,
  storedImagenes,
  findById,

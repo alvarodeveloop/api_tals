@@ -146,6 +146,8 @@ api.get('/Subscription', mdAuth.ensureAuth,Subscription.getSubscription)
 //Animations
 api.get('/Animations', mdAuth.ensureAuth,Animation.get)
 
+api.get('/AnimationsViews', mdAuth.ensureAuth,Animation.getViews)
+
 api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
     {
       name: "animacion"
