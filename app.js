@@ -6,10 +6,6 @@ global.config = require('./config');
 
 app.use(bodyParser.json({limit: '50mb', extended: true}));
 app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
-app.use(express.static(path.join(__dirname,'public')))
-
-// configurar rutas
-var routes = require('./routes');
 
 // congigurar CORS
 app.use((req, res, next) => {
@@ -19,6 +15,12 @@ app.use((req, res, next) => {
     res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
     next();
 });
+
+app.use(express.static(path.join(__dirname,'public')))
+
+// configurar rutas
+var routes = require('./routes');
+
 
 // rutas base
 app.use('/', routes);
