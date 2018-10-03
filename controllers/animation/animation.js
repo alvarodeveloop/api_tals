@@ -67,6 +67,8 @@ function storedImagenes(req,res){
    let params = req.body
    params.status = true;
 
+   const promise = new Promise((resolve,rejected) => {
+
    req.files.forEach( function(element, index) {
 
     params.ruta_imagen = element.filename;
@@ -76,7 +78,10 @@ function storedImagenes(req,res){
     }).error(err => res.status(500).json({ message: "error al guardar el registro"}))
 
    }); 
+
+    resolve()
     res.status(200).send({ message: "Imagenes subidas correctamente"});
+    }); 
 }
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/

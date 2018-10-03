@@ -4,10 +4,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 global.config = require('./config');
 
-app.use(bodyParser.json({limit: '50mb', extended: true}));
-app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
-
-// congigurar CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
@@ -16,11 +12,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static(path.join(__dirname,'public')))
+app.use(bodyParser.json({limit: '50mb', extended: true}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true }));
+app.use(express.static(path.join(__dirname,'/public')))
 
 // configurar rutas
 var routes = require('./routes');
-
 
 // rutas base
 app.use('/', routes);

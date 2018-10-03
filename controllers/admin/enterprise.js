@@ -1,6 +1,6 @@
 
 const models = require('../../models/')
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 
 

@@ -1,19 +1,33 @@
+var express = require('express');
 var app = require('./app'); 
 var models = require('./models');
 var path = require('path');
 var http = require('http');
-
 var port = process.env.PORT || 3789;
+
 
 models.sequelize.sync().then(runserver);
 
 function runserver(){
 
   var httpServer = http.createServer(app);
-    httpServer.listen(port, function(){
-    console.log('Servidor Node y Express está corriendo en el puerto' + port);
-    })
+  var io = require('socket.io')(httpServer);
 
+  httpServer.listen(port, function(){
+    console.log('Servidor Node y Express está corriendo en el puerto' + port);
+  })
+
+    io.on('connection', function(socket) {
+      console.log('Alguien se ha conectado hay que buscar el id token');
+      socket.on('message', function(data) {
+        //messages.push(data);
+        console.log('mensaje de la persona',data)
+        io.sockets.emit('message',"habla");
+      });
+    }); 
+      
+
+    
 
     const promise = new Promise((resolve,rejected) => {
 
