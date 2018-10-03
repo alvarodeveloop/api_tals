@@ -4,7 +4,7 @@
 const models = require('../../models/')
 
 var nodemailer = require('nodemailer');
-var bcrypt = require('bcrypt');
+var bcrypt = require('bcryptjs');
 var jwt = require('../../services/jwt');
 
 /* /////////////////////////////////// Motivos de los tickets ////////////////////////////////////////////////////*/

@@ -19,12 +19,14 @@ function runserver(){
 
     io.on('connection', function(socket) {
       console.log('Alguien se ha conectado hay que buscar el id token');
-    }); 
-      
-      io.on('message', function(data) {
+      socket.on('message', function(data) {
         //messages.push(data);
+        console.log('mensaje de la persona',data)
         io.sockets.emit('message',"habla");
       });
+    }); 
+      
+
     
 
     const promise = new Promise((resolve,rejected) => {
