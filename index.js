@@ -24,6 +24,10 @@ function runserver(){
         console.log('mensaje de la persona',data)
         io.sockets.emit('message',"habla");
       });
+
+      socket.on('disconnect', function(){
+        console.log('usuario desconectado');
+      });
     }); 
       
 
