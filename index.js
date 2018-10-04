@@ -19,10 +19,16 @@ function runserver(){
 
     io.on('connection', function(socket) {
       console.log('Alguien se ha conectado hay que buscar el id token');
+
       socket.on('message', function(data) {
         //messages.push(data);
-        console.log('mensaje de la persona',data)
-        io.sockets.emit('message',"habla");
+        if(io.emit('message', {type: 'new-message', text: "funciono!!"})){
+          console.log('mensaje enviado')
+        }else{
+          console.log('falla enviando el mensaje')
+        }
+
+        //io.sockets.emit('message',"habla");
       });
 
       socket.on('disconnect', function(){
