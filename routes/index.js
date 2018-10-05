@@ -102,6 +102,7 @@ api.post('/login', User.login)
  api.delete('/enterpriseClient/:id', mdAuth.ensureAuth,EnterpriseAdmin.destroyClient)
 
 //publicityEnterprise
+ api.get('/publicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterpriseActiva)
  api.get('/publicityEnterprise/:id', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterprise)
  api.get('/enterprisePublicity', mdAuth.ensureAuth,EnterpriseAdmin.publicityEnterpriseId)
  api.put('/PublicityActive/:id', mdAuth.ensureAuth,EnterpriseAdmin.PublicityActivo)

@@ -93,15 +93,40 @@ function runserver(){
       socket.on('enterpriseClient', function(data) 
       {
         
-          models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
-          const canal = enter.socketSordo
+         models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
 
-          if(io.to(canal).emit('enterpriseClient', {data: data}))
-              {
-                console.log('mensaje enviado')
-              }else{
-                console.log('falla enviando el mensaje')
-              } 
+           if(enter){
+            const texto = data.msg 
+            const canal = enter.socketSordo
+
+              models.Animation.findOne({where: { texto: texto}
+              }).then(animationdata => {
+
+                  if(animationdata){  
+
+                      if(io.to(canal).emit('enterpriseClient', {data: animationdata}))
+                        {
+                          console.log('mensaje enviado')
+                        }else{
+                          console.log('falla enviando el mensaje')
+                        } 
+
+                      }else
+                      {
+                        if(io.to(canal).emit('enterpriseClient', {data: null}))
+                        {
+                          console.log('mensaje enviado')
+                        }else{
+                          console.log('falla enviando el mensaje')
+                        } 
+                      }
+                
+             }).error(err => res.status(500).json({ message: "error en la petición"} ))
+            
+            }else
+            {
+              console.log("Error en la petición")
+            }  
 
           }).error(err => res.status(500).json({ message: "error en la petición"} )) 
         

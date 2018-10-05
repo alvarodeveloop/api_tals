@@ -5,6 +5,37 @@ var nodemailer = require('nodemailer');
 
 
 
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
+
+function publicityEnterpriseActiva(req,res){
+
+  console.log(req.params.id);
+
+  models.PublicityEnterprise.findAll(
+    {
+      where: { id_enterprise: req.params.id, statu: true},
+      include: [{
+        model: models.Publicity,
+        as : 'publicidades'
+      },
+      {
+        attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id','statu_id', 'email_verify'],
+        model: models.User,
+        as : 'empresas'
+      }
+      ]
+  
+  }).then(enter => {
+
+    res.json({publicempresa: enter })
+
+  }).error(err => res.status(500).json({ message: "error en la petición"} ))
+}
+
+
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
+
 /* ///////////////////////////////////////////////////////////////////////////////////*/
 
 function getEnterpirseOnline(req,res){
@@ -487,5 +518,6 @@ module.exports = {
   publicityEnterprise,
   publicityEnterpriseId,
   PublicityEnterpriseActivo,
-  PublicityActivo
+  PublicityActivo,
+  publicityEnterpriseActiva
 }
