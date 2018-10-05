@@ -259,6 +259,14 @@ function login(req, res) {
              else
              {  
 
+              let params_user = {
+                online: true
+              }
+
+              models.User.update(params_user,{where: {id: enter.id}}).then(public_public => {
+               console.log("update");
+              }).error(err => res.status(500).json({ message: "error en la petición"} ))  
+
               var user_array ={};
               user_array.nombre = enter.nombre; 
               user_array.correo = enter.correo; 

@@ -4,10 +4,51 @@ var bcrypt = require('bcryptjs');
 var nodemailer = require('nodemailer');
 
 
+
+/* ///////////////////////////////////////////////////////////////////////////////////*/
+
+function getEnterpirseOnline(req,res){
+  models.User.findAll( { where: { profile_id: 2 },
+     attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id', 'online', 'statu_id'],
+    include: [{
+        model: models.SocketOnline,
+        as : 'enterpriseonline',
+        required:true
+      }]
+
+   }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////*/
+
+
+
+
 function get(req,res){
 
   models.User.findAll( {
       where: { profile_id: 2 },
+      include: [{
+        model: models.Profile,
+        as : 'perfiles'
+      },{
+        model: models.Statu,
+        as : 'estatusUser'
+      }]
+  
+  }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las empresas. Verifiqué"}) )
+}
+
+
+function getOnline(req,res){
+
+  models.User.findAll( {
+      where: {  profile_id: 2,
+                online: true },
       include: [{
         model: models.Profile,
         as : 'perfiles'
@@ -402,7 +443,9 @@ function PublicityActivo(req,res){
 /* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  */
 
 module.exports = {
+  getEnterpirseOnline,
   get,
+  getOnline,
   stored,
   findById,
   update,

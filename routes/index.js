@@ -83,6 +83,9 @@ api.put('/profile/:correo', mdAuth.ensureAuth,User.updateProfile)
 //login
 api.post('/login', User.login)
 
+ api.get('/enterpriseOnline', mdAuth.ensureAuth,EnterpriseAdmin.getOnline)
+ api.get('/enterpriseSocket', mdAuth.ensureAuth,EnterpriseAdmin.getEnterpirseOnline)
+
  api.get('/enterpriseAdmin', mdAuth.ensureAuth,EnterpriseAdmin.get)
  api.get('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.findById)
  api.post('/enterpriseAdmin', mdAuth.ensureAuth,EnterpriseAdmin.stored)

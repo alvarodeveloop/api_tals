@@ -59,7 +59,12 @@ module.exports = (sequelize, DataTypes) => {
       //solo para los usuario profile tipo 3 de la de empresa
       enterprise_id: { 
           type: DataTypes.INTEGER    
-          },        
+          },
+
+      online: { 
+          type: DataTypes.BOOLEAN,
+          default: false,
+        },            
 
   });
 
@@ -83,6 +88,13 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'id_enterprise',
       'as': 'empresas'
       }) 
+
+
+      User.hasMany(model.SocketOnline,{
+        foreignKey: 'enterprise_id',
+        as : 'enterpriseonline'
+      })
+
 
   }
     return User;
