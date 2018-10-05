@@ -85,6 +85,8 @@ api.post('/login', User.login)
 
  api.get('/enterpriseOnline', mdAuth.ensureAuth,EnterpriseAdmin.getOnline)
  api.get('/enterpriseSocket', mdAuth.ensureAuth,EnterpriseAdmin.getEnterpirseOnline)
+ api.get('/enterpriseSocket/:id', mdAuth.ensureAuth,EnterpriseAdmin.getEnterpirseOnlineId)
+
 
  api.get('/enterpriseAdmin', mdAuth.ensureAuth,EnterpriseAdmin.get)
  api.get('/enterpriseAdmin/:id', mdAuth.ensureAuth,EnterpriseAdmin.findById)

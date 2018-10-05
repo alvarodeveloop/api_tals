@@ -23,8 +23,22 @@ function getEnterpirseOnline(req,res){
 
 /* ///////////////////////////////////////////////////////////////////////////////////*/
 
+function getEnterpirseOnlineId(req,res){
 
+   models.User.findAll( { where: { id: req.params.id },
+     attributes: ['id', 'nombre', 'rut', 'direccion', 'correo', 'telefono','tipo_profile_id', 'online', 'statu_id'],
+    include: [{
+        model: models.SocketOnline,
+        as : 'enterpriseonline',
+        required:true
+      }]
 
+   }).then(enter => {
+    res.json(enter)
+  }).error(err => res.status(500).json({ message: "error al buscar las Animaciones. Verifiqué"}) )
+}
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 
 function get(req,res){
 
@@ -458,6 +472,7 @@ function PublicityActivo(req,res){
 
 module.exports = {
   getEnterpirseOnline,
+  getEnterpirseOnlineId,
   get,
   getOnline,
   stored,
