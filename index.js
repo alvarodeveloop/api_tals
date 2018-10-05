@@ -47,6 +47,30 @@ function runserver(){
           }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
         }
 
+
+        if (data.type == 2) //empresa conectada
+        {     
+          const id_enterprise = data.enterprise_id;
+
+          models.User.findOne( { where: { correo: data.correo }}).then(enter => {
+
+           var emterprise_array ={};
+           emterprise_array.sordo_id = enter.id;
+           emterprise_array.socketSordo = socket.id;
+    
+           models.SocketOnline.update(emterprise_array,{where: {id_enterprise: id_enterprise}}).then(enter => { 
+             //mandar mensj
+             if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
+              {
+                console.log('mensaje enviado')
+              }else{
+                console.log('falla enviando el mensaje')
+              }
+
+           }).error(err => res.status(500).json({ message: "error Verifiqué y comuníquese con soporte"})) 
+          }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+        }// fin type == 2
+
       });
 
       // usuario sordo manda a empresa
@@ -57,6 +81,23 @@ function runserver(){
           const canal = enter.socketEnterprise
 
           if(io.to(canal).emit('clientEnterprise', {data: data}))
+              {
+                console.log('mensaje enviado')
+              }else{
+                console.log('falla enviando el mensaje')
+              } 
+
+          }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+        
+      });
+
+
+      socket.on('enterpriseClient', function(data) 
+      {
+          models.SocketOnline.findOne( { where: { enterprise_id: data.id }}).then(enter => {
+          const canal = enter.socketSordo
+
+          if(io.to(canal).emit('enterpriseClient', {data: data}))
               {
                 console.log('mensaje enviado')
               }else{
