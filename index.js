@@ -110,15 +110,21 @@ function runserver(){
 
         models.User.findAll().then( function(users) { 
           if (users) {
-             if (users.length == 0){
-
-
+            if (users.length == 0){
              //6599319 
-
              models.User.create({nombre : 'ADMINISTRADOR', correo: 'darwinerc92@gmail.com', 
                                  password :'$2b$10$Lq2iDGK5M2QvHAT./mxZv.hvVS.cvPWazNYVa3aKzFAA2H4gz15Em',
                                  profile_id:1, tipo_profile_id: 1, email_verify: true, statu_id: 1});
-             }
+             //6599319
+             models.User.create({nombre : 'Plumrose', correo: 'alvaro.develoop@gmail.com', 
+                                 password :'$2b$10$CW4Gn7vVPSiZwn6zAzD6xuwlxUXvmGZyW8FVEdA3yE6XyPyB7dfda',
+                                 profile_id:2, tipo_profile_id: 2, email_verify: true, statu_id: 1});
+             
+             models.User.create({nombre : 'Prueba', correo: 'prueba@gmail.com', 
+                                 password :'$2b$10$CW4Gn7vVPSiZwn6zAzD6xuwlxUXvmGZyW8FVEdA3yE6XyPyB7dfda',
+                                 profile_id:3, tipo_profile_id: 5, email_verify: true, statu_id: 1, 
+                                 enterprise_id: 1});
+            }
           } 
 
         });
