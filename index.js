@@ -20,12 +20,9 @@ function runserver(){
     io.on('connection', function(socket) {
       console.log('Alguien se ha conectado hay que buscar el id token');
 
-      socket.emit('conexionOk',"")
-
       socket.on('typeconnection', function(data) 
       {
        
-        console.log('aqui el type conexion',data.correo)
         if (data.type == 1) //empresa conectada
         {
           models.User.findOne( { where: { correo: data.correo }}).then(enter => {
@@ -77,7 +74,8 @@ function runserver(){
 
       socket.on('clientEnterprise', function(data) 
       {
-          models.SocketOnline.findOne( { where: { sordo_id: data.id }}).then(enter => {
+        
+          models.SocketOnline.findOne( { where: { socketSordo : socket.id }}).then(enter => {
           const canal = enter.socketEnterprise
 
           if(io.to(canal).emit('clientEnterprise', {data: data}))
@@ -94,7 +92,8 @@ function runserver(){
 
       socket.on('enterpriseClient', function(data) 
       {
-          models.SocketOnline.findOne( { where: { enterprise_id: data.id }}).then(enter => {
+        
+          models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
           const canal = enter.socketSordo
 
           if(io.to(canal).emit('enterpriseClient', {data: data}))
@@ -110,30 +109,36 @@ function runserver(){
 
 
       socket.on('disconnect', function(){       
+         console.log(socket.id)
          models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
+          if(enter){
+            const id = enter.id
+            models.SocketOnline.destroy({ where: { id }}).then(destroy => {
+              
+              console.log('usuario desconectado empresa');
 
-          const id = enter.id
-          models.SocketOnline.destroy({ where: { id }}).then(destroy => {
+            }).error(err => res.status(500).json({ message: "error en la petición"} ))
+          }
             
-            console.log('usuario desconectado');
-
-          }).error(err => res.status(500).json({ message: "error en la petición"} ))
          }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) ) 
 
          models.SocketOnline.findOne( { where: { socketSordo: socket.id }}).then(enter => {
 
-          const id = enter.id 
+          if(enter){
+            const id = enter.id 
 
-           var emterprise_array ={};
-           emterprise_array.sordo_id = null;
-           emterprise_array.socketSordo = null; 
-          //sordo saliendo
-          models.SocketOnline.update(emterprise_array,{where: {id: id}}).then(enter => {
+             var emterprise_array ={};
+             emterprise_array.sordo_id = null;
+             emterprise_array.socketSordo = null; 
+            //sordo saliendo
+            models.SocketOnline.update(emterprise_array,{where: {id: id}}).then(enter => {
 
-            console.log('usuario desconectado');
+              console.log('usuario desconectado cliente');
 
-          }).error(err => res.status(500).json({ message: "error en la petición"} )) 
-         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) ) 
+            }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+          }
+            
+         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
       });
 
 
