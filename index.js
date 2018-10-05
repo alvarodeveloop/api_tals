@@ -58,7 +58,7 @@ function runserver(){
            emterprise_array.sordo_id = enter.id;
            emterprise_array.socketSordo = socket.id;
     
-           models.SocketOnline.update(emterprise_array,{where: {id_enterprise: id_enterprise}}).then(enter => { 
+           models.SocketOnline.update(emterprise_array,{where: {enterprise_id: id_enterprise}}).then(enter => { 
              //mandar mensj
              if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
               {
