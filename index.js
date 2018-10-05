@@ -20,23 +20,16 @@ function runserver(){
     io.on('connection', function(socket) {
       console.log('Alguien se ha conectado hay que buscar el id token');
 
-      socket.on('message', function(data) {
-        //messages.push(data);
-        if(io.emit('message', {type: 'new-message', text: "funciono!!"})){
-          console.log('mensaje enviado')
-        }else{
-          console.log('falla enviando el mensaje')
-        }
-
-        //io.sockets.emit('message',"habla");
-      });
+      socket.emit('conexionOk',"")
 
       socket.on('typeconnection', function(data) 
       {
        
+        console.log('aqui el type conexion',data.correo)
         if (data.type == 1) //empresa conectada
         {
           models.User.findOne( { where: { correo: data.correo }}).then(enter => {
+
 
            var emterprise_array ={};
            emterprise_array.enterprise_id = enter.id;
