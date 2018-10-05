@@ -239,6 +239,20 @@ function storedClient(req,res){
       req.body.tipo_profile_id = 5; //opcion desde la vista un seleccione de perfiles de empresa
       req.body.email_verify = true;  
 
+
+      let whereOr = {
+    [models.Op.or]: [{
+      correo: req.body.correo,
+    },{
+      correo_ceo: req.body.correo_ceo
+    },{
+      rut: req.body.rut
+    },{
+      rut_ceo: req.body.rut_ceo
+    }]
+  }  
+
+
   models.User.findAll({ where: whereOr}).then(total => {
     if(total.length > 0){
       res.status(500).json({ message: "Ya esta en uso el correo o el correo del ceo o el rut o el rut del ceo" })
