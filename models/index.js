@@ -19,8 +19,8 @@ port: '5432'
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5434'
-})
-*/
+})*/
+
 const models = {
   User: sequelize.import('./user'),
   Publicity: sequelize.import('./publicity'),

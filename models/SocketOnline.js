@@ -2,7 +2,7 @@
 
 module.exports = (sequelize, DataTypes) => {
 
-  const SocketOnline = sequelize.define("SocketOnline", {
+  const SocketOnline = sequelize.define("socketOnline", {
 
       enterprise_id: { 
           type: DataTypes.INTEGER    

@@ -31,6 +31,31 @@ function runserver(){
         //io.sockets.emit('message',"habla");
       });
 
+      socket.on('typeconnection', function(data) 
+      {
+       
+        if (data.type == 1) //empresa conectada
+        {
+          models.User.findOne( { where: { correo: data.correo }}).then(enter => {
+
+           var emterprise_array ={};
+           emterprise_array.enterprise_id = enter.id;
+           emterprise_array.socketEnterprise = socket.id;
+           
+           models.SocketOnline.create(emterprise_array).then(publicityenterprise => {
+             //mandar mensj
+             if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
+              {
+                console.log('mensaje enviado')
+              }else{
+                console.log('falla enviando el mensaje')
+              }
+           }).error(err => res.status(500).json({ message: "error al guardar el registro"}))  
+          }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+        }
+
+      });
+
       socket.on('disconnect', function(){
         console.log('usuario desconectado');
       });
