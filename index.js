@@ -56,13 +56,55 @@ function runserver(){
 
       });
 
-      socket.on('disconnect', function(){
-        console.log('usuario desconectado');
-      });
-    }); 
-      
+      // usuario sordo manda a empresa
 
-    
+      socket.on('clientEnterprise', function(data) 
+      {
+          models.SocketOnline.findOne( { where: { sordo_id: data.id }}).then(enter => {
+          const canal = enter.socketEnterprise
+
+          if(io.to(canal).emit('clientEnterprise', {data: data}))
+              {
+                console.log('mensaje enviado')
+              }else{
+                console.log('falla enviando el mensaje')
+              } 
+
+          }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+        
+      });
+
+
+      socket.on('disconnect', function(){       
+         models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
+
+          const id = enter.id
+          models.SocketOnline.destroy({ where: { id }}).then(destroy => {
+            
+            console.log('usuario desconectado');
+
+          }).error(err => res.status(500).json({ message: "error en la petición"} ))
+         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) ) 
+
+         models.SocketOnline.findOne( { where: { socketSordo: socket.id }}).then(enter => {
+
+          const id = enter.id 
+
+           var emterprise_array ={};
+           emterprise_array.sordo_id = null;
+           emterprise_array.socketSordo = null; 
+          //sordo saliendo
+          models.SocketOnline.update(emterprise_array,{where: {id: id}}).then(enter => {
+
+            console.log('usuario desconectado');
+
+          }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) ) 
+      });
+
+
+    }); //fin del socket
+          
 
     const promise = new Promise((resolve,rejected) => {
 
