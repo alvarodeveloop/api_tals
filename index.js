@@ -78,7 +78,7 @@ function runserver(){
           models.SocketOnline.findOne( { where: { socketSordo : socket.id }}).then(enter => {
           const canal = enter.socketEnterprise
 
-          if(io.to(canal).emit('clientEnterprise', {data: data}))
+          if(io.to(canal).emit('clientEnterprise', data.data))
               {
                 console.log('mensaje enviado')
               }else{
