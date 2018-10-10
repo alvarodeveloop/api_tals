@@ -3,18 +3,18 @@ var Sequelize = require('sequelize');
 
 // api heroku 
 
-const sequelize = new Sequelize("d6r5m7klc5184d","fnzzpnlymgmwen","466b124d0e21e0515bf80fd764c51668ef5d3a59ce0d3b06392c757f75f78a0c", {  
+/*const sequelize = new Sequelize("d6r5m7klc5184d","fnzzpnlymgmwen","466b124d0e21e0515bf80fd764c51668ef5d3a59ce0d3b06392c757f75f78a0c", {  
 host: 'ec2-54-225-97-112.compute-1.amazonaws.com',  
 dialect: 'postgres',
 port: '5432'
-})
+})*/
 
 // api local 
 
-/*const sequelize = new Sequelize("tals","postgres","admin123", {  
+const sequelize = new Sequelize("tals","postgres","admin123", {  
 dialect: 'postgres',
 port: '5432'
-})*/
+})
 
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
