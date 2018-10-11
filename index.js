@@ -56,10 +56,12 @@ function runserver(){
            emterprise_array.sordo_id = enter.id;
            emterprise_array.socketSordo = socket.id;
     
-           models.SocketOnline.update(emterprise_array,{where: {enterprise_id: id_enterprise}}).then(enterEnterprise => { 
+           models.SocketOnline.update(emterprise_array,{where: {enterprise_id: id_enterprise},
+            returning: true,
+            plain: true
+           },  ).then(enterEnterprise => { 
              //mandar mensj
-             const canal = enterEnterprise.socketEnterprise;
-
+             const canal = enterEnterprise[1].dataValues.socketEnterprise
               //if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
               if(io.to(socket.id).emit('typeconnection', {type: 'new-message', text: "conectado"}))
               {
