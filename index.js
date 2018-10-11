@@ -272,13 +272,13 @@ function runserver(){
 
           if(enter)
           {
-            const id_enterprise = enter.socketEnterprise
-            const id_sordo = enter.socketEnterprise
+            const id_enterprise = enter.enterprise_id
+            const id_sordo = enter.sordo_id
           
             models.Historial.findAll({where: { id_enterprise: id_enterprise, id_sordo: id_sordo }}).then(mensj => {
-              if(io.to(socket.id).emit('historial', {data: mensj}))
+              if(io.to(socket.id).emit('historial', {mensj}))
                   {
-                    console.log('mensaje enviado de salida ======================')
+                    console.log('mensaje enviado de salida')
                   }else{
                      console.log('falla enviando el mensaje')
                 }   
