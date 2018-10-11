@@ -7,6 +7,7 @@ var Sequelize = require('sequelize');
 host: 'ec2-54-225-97-112.compute-1.amazonaws.com',  
 dialect: 'postgres',
 port: '5432'
+<<<<<<< HEAD
 })*/
 
 // api local 
@@ -19,8 +20,8 @@ port: '5432'
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5434'
-})
-*/
+})*/
+
 const models = {
   User: sequelize.import('./user'),
   Publicity: sequelize.import('./publicity'),
@@ -37,6 +38,7 @@ const models = {
   Subscription: sequelize.import('./subscription'),
   SubscriptionEnterprise: sequelize.import('./subscriptionEnterprise'),
   SocketOnline: sequelize.import('./socketOnline'),
+  Historial: sequelize.import('./historial'),
 }; 
 
 

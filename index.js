@@ -80,7 +80,19 @@ function runserver(){
 
           if(io.to(canal).emit('clientEnterprise', data.data))
               {
+
+              const texto = data.msg
+                var emterprise_array ={};
+                emterprise_array.enterprise_id = enter.enterprise_id;
+                emterprise_array.sordo_id = enter.sordo_id;
+                emterprise_array.mensaje = texto;
+                emterprise_array.tipo = 1;
+         
+           models.Historial.create(emterprise_array).then(historial => {
                 console.log('mensaje enviado')
+           
+           }).error(err => res.status(500).json({ message: "error al guardar el registro"})) 
+           
               }else{
                 console.log('falla enviando el mensaje')
               } 
@@ -106,7 +118,18 @@ function runserver(){
 
                       if(io.to(canal).emit('enterpriseClient', {data: animationdata}))
                         {
-                          console.log('mensaje enviado')
+                            const texto = data.msg
+                            var emterprise_array ={};
+                            emterprise_array.enterprise_id = enter.enterprise_id;
+                            emterprise_array.sordo_id = enter.sordo_id;
+                            emterprise_array.mensaje = texto;
+                            emterprise_array.tipo = 2;
+                     
+                       models.Historial.create(emterprise_array).then(historial => {
+                            console.log('mensaje enviado')
+           
+                          }).error(err => res.status(500).json({ message: "error al guardar el registro"})) 
+                       
                         }else{
                           console.log('falla enviando el mensaje')
                         } 
@@ -138,9 +161,18 @@ function runserver(){
          models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
           if(enter){
             const id = enter.id
+            const canal = enter.socketSordo
+
             models.SocketOnline.destroy({ where: { id }}).then(destroy => {
+
+              if(io.to(canal).emit('exit', {data: "La empresa se desconecto"}))
+                  {
+                     console.log('usuario desconectado empresa');
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
               
-              console.log('usuario desconectado empresa');
+             
 
             }).error(err => res.status(500).json({ message: "error en la petición"} ))
           }
@@ -151,6 +183,7 @@ function runserver(){
 
           if(enter){
             const id = enter.id 
+            const canal = enter.socketEnterprise
 
              var emterprise_array ={};
              emterprise_array.sordo_id = null;
@@ -158,7 +191,12 @@ function runserver(){
             //sordo saliendo
             models.SocketOnline.update(emterprise_array,{where: {id: id}}).then(enter => {
 
-              console.log('usuario desconectado cliente');
+              if(io.to(canal).emit('exit', {data: "El cliente se desconecto"}))
+                  {
+                       console.log('usuario desconectado cliente');
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
 
             }).error(err => res.status(500).json({ message: "error en la petición"} )) 
           }
@@ -167,6 +205,98 @@ function runserver(){
       });
 
 
+        socket.on('saliendo', function(){       
+         models.SocketOnline.findOne( { where: { socketEnterprise: socket.id }}).then(enter => {
+          if(enter){
+            const id = enter.id
+            const canal = enter.socketSordo
+
+            models.SocketOnline.destroy({ where: { id }}).then(destroy => {
+
+              if(io.to(canal).emit('exit', {data: "La empresa se desconecto"}))
+                  {
+                     console.log('usuario desconectado empresa ===============================');
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
+              
+             
+
+            }).error(err => res.status(500).json({ message: "error en la petición"} ))
+          }
+            
+         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) ) 
+
+         models.SocketOnline.findOne( { where: { socketSordo: socket.id }}).then(enter => {
+
+          if(enter){
+            const id = enter.id 
+            const canal = enter.socketEnterprise
+
+             var emterprise_array ={};
+             emterprise_array.sordo_id = null;
+             emterprise_array.socketSordo = null; 
+            //sordo saliendo
+            models.SocketOnline.update(emterprise_array,{where: {id: id}}).then(enter => {
+
+              if(io.to(canal).emit('exit', {data: "El cliente se desconecto"}))
+                  {
+                       console.log('usuario desconectado cliente ==============================================');
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
+
+            }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+          }
+            
+         }).error(err => res.status(500).json({ message: "error al buscar el usuario del token. Verifiqué y comuníquese con soporte"}) )
+      });
+
+
+       socket.on('historial', function()
+       {
+         models.SocketOnline.findOne( { where: { socketSordo : socket.id }}).then(enter => {
+
+          if(enter)
+          {
+            const id_enterprise = enter.socketEnterprise
+            const id_sordo = enter.socketEnterprise
+          
+            models.Historial.findAll({where: { id_enterprise: id_enterprise, id_sordo: id_sordo }}).then(mensj => {
+              if(io.to(socket.id).emit('historial', {data: mensj}))
+                  {
+                    console.log('mensaje enviado de salida ======================')
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
+
+            }).error(err => res.status(500).json({ message: "error en la petición"} ))          
+          }
+         }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+
+
+
+         models.SocketOnline.findOne( { where: { socketEnterprise : socket.id }}).then(enter => {
+
+          if(enter)
+          {
+            const id_enterprise = enter.socketEnterprise
+            const id_sordo = enter.socketEnterprise
+          
+            models.Historial.findAll({where: { id_enterprise: id_enterprise, id_sordo: id_sordo }}).then(mensj => {
+              if(io.to(socket.id).emit('historial', {data: mensj}))
+                  {
+                    console.log('mensaje enviado de salida1 ======================')
+                  }else{
+                     console.log('falla enviando el mensaje')
+                }   
+
+            }).error(err => res.status(500).json({ message: "error en la petición"} ))          
+          }
+         }).error(err => res.status(500).json({ message: "error en la petición"} )) 
+
+       });       
+   
     }); //fin del socket
           
 

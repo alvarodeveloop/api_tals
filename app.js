@@ -4,6 +4,7 @@ const path = require('path')
 const bodyParser = require('body-parser')
 global.config = require('./config');
 
+
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
