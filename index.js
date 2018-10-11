@@ -34,7 +34,8 @@ function runserver(){
            
            models.SocketOnline.create(emterprise_array).then(publicityenterprise => {
              //mandar mensj
-             if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
+             if(io.to(socket.id).emit('typeconnection', {type: 'new-message', text: "conectado"}))
+            // if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
               {
                 console.log('mensaje enviado')
               }else{
@@ -55,11 +56,21 @@ function runserver(){
            emterprise_array.sordo_id = enter.id;
            emterprise_array.socketSordo = socket.id;
     
-           models.SocketOnline.update(emterprise_array,{where: {enterprise_id: id_enterprise}}).then(enter => { 
+           models.SocketOnline.update(emterprise_array,{where: {enterprise_id: id_enterprise}}).then(enterEnterprise => { 
              //mandar mensj
-             if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
+             const canal = enterEnterprise.socketEnterprise;
+
+              //if(io.emit('typeconnection', {type: 'new-message', text: "conectado"}))
+              if(io.to(socket.id).emit('typeconnection', {type: 'new-message', text: "conectado"}))
               {
-                console.log('mensaje enviado')
+                 console.log('mensaje enviado de conectado')
+
+                if(io.to(canal).emit('saludo', {data: "Se ha conectado un cliente"}))
+                        {
+                          console.log('mensaje enviado de saludo')
+                        }else{
+                          console.log('falla enviando el mensaje')
+                        } 
               }else{
                 console.log('falla enviando el mensaje')
               }
