@@ -15,12 +15,18 @@ dialectOptions: {ssl: true}
 /*const sequelize = new Sequelize("tals","postgres","admin123", {  
 dialect: 'postgres',
 port: '5432'
+<<<<<<< HEAD
 })*/
 
 const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5433'
 })
+
+/*const sequelize = new Sequelize("tals","postgres","123456", {  
+dialect: 'postgres',
+port: '5434'
+})*/
 
 const models = {
   User: sequelize.import('./user'),
@@ -38,6 +44,7 @@ const models = {
   Subscription: sequelize.import('./subscription'),
   SubscriptionEnterprise: sequelize.import('./subscriptionEnterprise'),
   SocketOnline: sequelize.import('./socketOnline'),
+  Historial: sequelize.import('./historial'),
 }; 
 
 
