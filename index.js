@@ -256,7 +256,7 @@ function runserver(){
 
               if(io.to(canal).emit('exit', {data: "El cliente se desconecto"}))
                   {
-                       console.log('usuario desconectado cliente ==============================================');
+                       console.log('usuario desconectado cliente');
                   }else{
                      console.log('falla enviando el mensaje')
                 }   
@@ -301,7 +301,7 @@ function runserver(){
             models.Historial.findAll({where: { id_enterprise: id_enterprise, id_sordo: id_sordo }}).then(mensj => {
               if(io.to(socket.id).emit('historial', {data: mensj}))
                   {
-                    console.log('mensaje enviado de salida1 ======================')
+                    console.log('mensaje enviado de salida')
                   }else{
                      console.log('falla enviando el mensaje')
                 }   

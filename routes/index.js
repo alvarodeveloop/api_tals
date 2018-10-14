@@ -58,11 +58,9 @@ const Client = require('../controllers/client/client')
 const Subscription = require('../controllers/subscription/subscription')
 const Maestro = require('../controllers/tals/maestro')
 const Animation = require('../controllers/animation/animation')
+const Rate = require('../controllers/rate/rate')
 
 var mdAuth = require('../middlewares/authenticated')
-
-
-
 
 //maestro del sistema
 api.get('/AdminMotivo', Maestro.allMotivo)
@@ -172,6 +170,12 @@ api.post('/Animations', mdAuth.ensureAuth,uploadAnimation.fields([
  api.delete('/AnimationsOne/:id', mdAuth.ensureAuth,Animation.destroyOne)
  api.delete('/AnimationsAll/:id', mdAuth.ensureAuth,Animation.destroyAll)
  api.delete('/Animations/:id', mdAuth.ensureAuth,Animation.destroy)
+
+
+ api.post('/Rate', mdAuth.ensureAuth,Rate.stored)
+ api.get('/Rate', mdAuth.ensureAuth,Rate.get)
+
+
 
 
 module.exports = api

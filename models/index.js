@@ -12,22 +12,22 @@ dialectOptions: {ssl: true}
 */
 // api local 
 
-/*const sequelize = new Sequelize("tals","postgres","admin123", {  
+const sequelize = new Sequelize("tals","postgres","admin123", {  
 dialect: 'postgres',
 port: '5432'
-<<<<<<< HEAD
-})*/
-
-const sequelize = new Sequelize("tals","postgres","123456", {  
-dialect: 'postgres',
-port: '5433'
 })
 
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
-port: '5434'
-})*/
+port: '5433'
+})
+*/
 
+/*const sequelize = new Sequelize("tals","postgres","123456", {  
+dialect: 'postgres',
+port: '5434'
+})
+*/
 const models = {
   User: sequelize.import('./user'),
   Publicity: sequelize.import('./publicity'),
@@ -45,6 +45,7 @@ const models = {
   SubscriptionEnterprise: sequelize.import('./subscriptionEnterprise'),
   SocketOnline: sequelize.import('./socketOnline'),
   Historial: sequelize.import('./historial'),
+  Rate: sequelize.import('./rate'),
 }; 
 
 
