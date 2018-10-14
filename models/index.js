@@ -12,16 +12,16 @@ dialectOptions: {ssl: true}
 */
 // api local 
 
-const sequelize = new Sequelize("tals","postgres","admin123", {  
+/*const sequelize = new Sequelize("tals","postgres","admin123", {  
 dialect: 'postgres',
 port: '5432'
-})
+})*/
 
-/*const sequelize = new Sequelize("tals","postgres","123456", {  
+const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5433'
 })
-*/
+
 
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
