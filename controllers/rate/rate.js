@@ -12,7 +12,6 @@ function stored(req,res){
 
   models.User.findOne( {
       where: { correo: req.userCorreo }}).then(enter_id => {  
-        s
       params.user_id = enter_id.id;
       params.status = true;
 
