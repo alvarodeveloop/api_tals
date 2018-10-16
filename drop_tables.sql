@@ -1,3 +1,10 @@
+DROP TABLE animation_imagens;
+DROP TABLE animations;
+DROP TABLE historials;
+DROP TABLE subscription_enterprises;
+DROP TABLE subscriptions;
+DROP TABLE rates;
+DROP TABLE ticket_res;
 DROP TABLE codes;
 DROP TABLE publicity_enterprises;
 DROP TABLE publicity;
@@ -7,4 +14,3 @@ DROP TABLE users;
 DROP TABLE profiles;
 DROP TABLE status;
 DROP TABLE tipo_profiles;
-DROP TABLE ticket_res;
