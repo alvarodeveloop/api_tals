@@ -158,7 +158,7 @@ function destroyOne(req,res){
 
   models.AnimationImagen.findById(id).then(publi => {
     
-    const filePath = 'public/animationImagen/'+publi.dataValues.ruta_imagen; 
+    const filePath = 'public/animationImagen/'+publi.ruta_imagen; 
 
     models.AnimationImagen.destroy({ where: { id }}).then(destroy => {
       fs.unlinkSync(filePath);
