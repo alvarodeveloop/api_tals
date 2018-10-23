@@ -124,11 +124,18 @@ function codeRecoveryPassword(req,res){
 
       //cambio de contraseña al correo
     var Service = nodemailer.createTransport({
-      service: global.config.correo.service,
+      service: "smtp",
+      host: global.config.correo.service,
+      port: 465,
+      secure: true,
       auth: {
         user: global.config.correo.user,
         pass: global.config.correo.pass
-      }
+      },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+     }
     });
 
     var mailOptions = {
@@ -192,11 +199,18 @@ function recoveryPassword(req,res){
       }
 
     var Service = nodemailer.createTransport({
-      service: global.config.correo.service,
+      service: "smtp",
+      host: global.config.correo.service,
+      port: 465,
+      secure: true,
       auth: {
         user: global.config.correo.user,
         pass: global.config.correo.pass
-      }
+      },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+     }
     });
 
     var mailOptions = {

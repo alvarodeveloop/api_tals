@@ -152,11 +152,18 @@ function stored(req,res){
 
 
 var Service = nodemailer.createTransport({
-      service: global.config.correo.service,
+      service: "smtp",
+      host: global.config.correo.service,
+      port: 465,
+      secure: true,
       auth: {
         user: global.config.correo.user,
         pass: global.config.correo.pass
-      }
+      },
+      tls: {
+        // do not fail on invalid certs
+        rejectUnauthorized: false
+     }
     });
 
     var mailOptions = {
@@ -164,8 +171,7 @@ var Service = nodemailer.createTransport({
         to: emailpassword,
         subject: 'Validación de cuenta',
         
-    html: 'Tú contraseña es '+emailpassword+ ' <br> para verificar su cuenta este es su codigo de verificación: '+code+
-    '<body> <p style="color:#FF0000";>Red paragraph text</p></body>'
+    html: 'Tú contraseña es '+emailpassword+ ' <br> para verificar su cuenta este es su codigo de verificación: '+code
 
 
       };
