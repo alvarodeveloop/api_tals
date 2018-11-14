@@ -3,12 +3,17 @@ var app = require('./app');
 var models = require('./models');
 var path = require('path');
 var http = require('http');
-var port = process.env.PORT || 3789;
-
+var port = process.env.PORT || 3000;
+var certPath = '../../../../etc/letsencrypt/live/app.tals.cl/'
 
 models.sequelize.sync().then(runserver);
 
 function runserver(){
+
+  var httpsOptions = {
+    key: fs.readFileSync(path.join(certPath, "privkey.pem")),
+    cert: fs.readFileSync(path.join(certPath, "cert.pem"))
+  };
 
   var httpServer = http.createServer(app);
   var io = require('socket.io')(httpServer);
@@ -389,7 +394,7 @@ function runserver(){
             if (users.length == 0){
              //6599319 
              models.User.create({nombre : 'ADMINISTRADOR', correo: 'darwinerc92@gmail.com', 
-                                 password :'$2b$10$Lq2iDGK5M2QvHAT./mxZv.hvVS.cvPWazNYVa3aKzFAA2H4gz15Em',
+                                 password :'$2b$10$CW4Gn7vVPSiZwn6zAzD6xuwlxUXvmGZyW8FVEdA3yE6XyPyB7dfda',
                                  profile_id:1, tipo_profile_id: 1, email_verify: true, statu_id: 1});
              //6599319
              models.User.create({nombre : 'Plumrose', correo: 'alvaro.develoop@gmail.com', 
