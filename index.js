@@ -5,6 +5,7 @@ var path = require('path');
 var http = require('http');
 var port = process.env.PORT || 3000;
 var certPath = '../../../../etc/letsencrypt/live/app.tals.cl/'
+const fs = require('fs')
 
 models.sequelize.sync().then(runserver);
 
