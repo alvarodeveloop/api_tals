@@ -12,10 +12,10 @@ dialectOptions: {ssl: true}
 */
 // api local 
 
-/*const sequelize = new Sequelize("tals","postgres","admin123", {  
+const sequelize = new Sequelize("tals","postgres","admin123", {  
 dialect: 'postgres',
 port: '5432'
-})*/
+})
 
 /*const sequelize = new Sequelize("tals","alvarodeveloop1","programacion", {  
 host: 'talsdatabase.c1pu6rgvhofl.us-east-2.rds.amazonaws.com',  
@@ -25,10 +25,10 @@ dialectOptions: {ssl: true}
 
 })*/
 
-const sequelize = new Sequelize("tals","postgres","123456", {  
+/*const sequelize = new Sequelize("tals","postgres","123456", {  
 dialect: 'postgres',
 port: '5433'
-})
+})*/
 
 
 /*const sequelize = new Sequelize("tals","postgres","123456", {  
