@@ -51,7 +51,7 @@ const models = {
   TicketRes: sequelize.import('./ticketRes'),
   Subscription: sequelize.import('./subscription'),
   SubscriptionEnterprise: sequelize.import('./subscriptionEnterprise'),
-  SocketOnline: sequelize.import('./socketOnline'),
+  SocketOnline: sequelize.import('./SocketOnline'),
   Historial: sequelize.import('./historial'),
   Rate: sequelize.import('./rate'),
 }; 
